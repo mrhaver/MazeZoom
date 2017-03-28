@@ -4,8 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeZoom.API", "MazeZoom.API\MazeZoom.API.csproj", "{8FB36793-5248-403B-A81B-C7CF5B419022}"
+	ProjectSection(ProjectDependencies) = postProject
+		{594258EF-8799-4056-9A9E-CDE238738879} = {594258EF-8799-4056-9A9E-CDE238738879}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeZoom.Core.Profiling", "MazeZoom.Core.Profiling\MazeZoom.Core.Profiling.csproj", "{594258EF-8799-4056-9A9E-CDE238738879}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeZoom.Core.Profiling", "MazeZoom.Core.Profiling\MazeZoom.Core.Profiling.csproj", "{594258EF-8799-4056-9A9E-CDE238738879}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
