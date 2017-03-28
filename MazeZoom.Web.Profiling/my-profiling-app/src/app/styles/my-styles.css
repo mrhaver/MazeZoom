@@ -8,9 +8,12 @@ body {
     display: block;
     margin: auto;
     border-radius: 10%;
+    max-width: 600px;
+    max-height:600px;
 }
 .imageContainer {
-    height:600px;
+    height: 600px;
+    width: 600px;
 }
 .footerSize {
     height:100px;

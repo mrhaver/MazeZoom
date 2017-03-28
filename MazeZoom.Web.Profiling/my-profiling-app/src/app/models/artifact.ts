@@ -1,5 +1,4 @@
 export class Artifact {
-    id: number;
-    imgSrc: string;
-    value: string;
+    constructor(public id: number, public imgSrc: string, public value: string) {
+    }
 }
