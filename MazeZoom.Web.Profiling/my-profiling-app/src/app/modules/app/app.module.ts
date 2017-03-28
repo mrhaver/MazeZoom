@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { ArtifactService } from "app/services/artifact.service";
 import { InMemoryDataService } from "app/data/in-memory-data.service";
-//import { InMemoryWebApiModule } from "angular-web-module-api";
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { OverviewComponent } from "app/components/overview/overview.component";
 import { JudgementComponent } from "app/components/judgement/judgement.component";

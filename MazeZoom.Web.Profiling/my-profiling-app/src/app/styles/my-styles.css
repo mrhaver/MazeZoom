@@ -1,0 +1,14 @@
+body {
+    background-color: #F5F7F2;
+}
+.maxWidth {
+    width: 100%;
+}
+.imageSize {
+    /*object-fit: none;*/
+    object-position: center 0;
+    border-radius: 10%;
+}
+.imageContainer {
+    height:600px;
+}
