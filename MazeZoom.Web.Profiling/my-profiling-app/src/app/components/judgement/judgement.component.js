@@ -22,7 +22,10 @@ var JudgementComponent = (function () {
     JudgementComponent.prototype.getArtifacts = function () {
         var _this = this;
         this.artifactService.getArtifacts().then(function (artifacts) { return _this.artifacts = artifacts; })
-            .then(function (artifacts) { return _this.currArtifact = artifacts[_this.index]; });
+            .then(function (artifacts) {
+            _this.currArtifact = artifacts[_this.index];
+            _this.remaining = artifacts.length;
+        });
     };
     JudgementComponent.prototype.getArtifactsApi = function () {
         this.artifactService.getArtifactsApi().subscribe(function (artifacts) {
@@ -33,12 +36,14 @@ var JudgementComponent = (function () {
         this.name = this.currArtifact.imgSrc;
         this.currArtifact.value = 'LIKE';
         this.index++;
+        this.remaining--;
         this.currArtifact = this.artifacts[this.index];
     };
     JudgementComponent.prototype.dislike = function () {
         this.name = 'DISLIKE';
         this.currArtifact.value = 'DISLIKE';
         this.index++;
+        this.remaining--;
         this.currArtifact = this.artifacts[this.index];
     };
     return JudgementComponent;

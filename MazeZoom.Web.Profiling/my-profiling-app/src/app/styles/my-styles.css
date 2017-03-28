@@ -5,10 +5,17 @@ body {
     width: 100%;
 }
 .imageSize {
-    /*object-fit: none;*/
-    object-position: center 0;
+    display: block;
+    margin: auto;
     border-radius: 10%;
 }
 .imageContainer {
     height:600px;
+}
+.footerSize {
+    height:100px;
+}
+.remainingNumber {
+    font-size: 50px;
+    padding: 5px;
 }

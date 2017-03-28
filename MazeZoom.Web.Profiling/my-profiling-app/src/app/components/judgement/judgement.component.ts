@@ -11,23 +11,27 @@ import { ArtifactService } from "../../services/artifact.service";
 export class JudgementComponent implements OnInit {
 
   constructor(private artifactService: ArtifactService) { }
-  
+
   ngOnInit(): void {
     this.getArtifacts();
   }
-  name:string;
+  name: string;
   artifacts: Artifact[];
   currArtifact: Artifact;
   index = 0;
+  remaining: number;
 
 
   getArtifacts(): void {
     this.artifactService.getArtifacts().then(artifacts => this.artifacts = artifacts)
-    .then(artifacts=> this.currArtifact = artifacts[this.index]);
+      .then(artifacts => {
+        this.currArtifact = artifacts[this.index];
+        this.remaining = artifacts.length;
+      });
   }
 
-  getArtifactsApi():void {
-    this.artifactService.getArtifactsApi().subscribe(artifacts=>{
+  getArtifactsApi(): void {
+    this.artifactService.getArtifactsApi().subscribe(artifacts => {
       console.log(artifacts);
     })
   }
@@ -36,13 +40,15 @@ export class JudgementComponent implements OnInit {
     this.name = this.currArtifact.imgSrc
     this.currArtifact.value = 'LIKE';
     this.index++;
+    this.remaining--;
     this.currArtifact = this.artifacts[this.index];
   }
   dislike(): void {
     this.name = 'DISLIKE';
     this.currArtifact.value = 'DISLIKE';
     this.index++;
+    this.remaining--;
     this.currArtifact = this.artifacts[this.index];
   }
-  
+
 }
