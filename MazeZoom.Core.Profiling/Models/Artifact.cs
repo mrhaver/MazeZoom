@@ -43,11 +43,17 @@ namespace MazeZoom.Core.Profiling.Models
 
         #endregion
 
-        public Artifact()
+        #region constructors
+        public Artifact(){}
+
+        public Artifact(string name, DateTime date, string url)
         {
-
+            this.name = name;
+            this.date = date;
+            this.url = url;
         }
+        #endregion
 
-        
+
     }
 }
