@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Artifact } from "../../models/artifact";
+import { ArtifactService } from "../../services/artifact.service";
 
 @Component({
   selector: 'my-judgement-component',
@@ -6,6 +8,41 @@ import { Component } from '@angular/core';
   styleUrls: ['./judgement.component.css']
 })
 
-export class JudgementComponent {
-  title = 'app works!';
+export class JudgementComponent implements OnInit {
+
+  constructor(private artifactService: ArtifactService) { }
+  
+  ngOnInit(): void {
+    this.getArtifacts();
+  }
+  name:string;
+  artifacts: Artifact[];
+  currArtifact: Artifact;
+  index = 0;
+
+
+  getArtifacts(): void {
+    this.artifactService.getArtifacts().then(artifacts => this.artifacts = artifacts)
+    .then(artifacts=> this.currArtifact = artifacts[this.index]);
+  }
+
+  getArtifactsApi():void {
+    this.artifactService.getArtifactsApi().subscribe(artifacts=>{
+      console.log(artifacts);
+    })
+  }
+
+  like(): void {
+    this.name = this.currArtifact.imgSrc
+    this.currArtifact.value = 'LIKE';
+    this.index++;
+    this.currArtifact = this.artifacts[this.index];
+  }
+  dislike(): void {
+    this.name = 'DISLIKE';
+    this.currArtifact.value = 'DISLIKE';
+    this.index++;
+    this.currArtifact = this.artifacts[this.index];
+  }
+  
 }
