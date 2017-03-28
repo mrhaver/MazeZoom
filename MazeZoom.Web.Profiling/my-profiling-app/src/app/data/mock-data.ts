@@ -1,4 +1,4 @@
-import { Artifact } from "app/models/artifact";
+import { Artifact } from "../models/artifact";
 
 export const ARTIFACTS: Artifact[] = [
     {id: 0, imgSrc: './app/images/gogh1.png', value: ''},

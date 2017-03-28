@@ -1,0 +1,1 @@
+{"version":3,"file":"judgement.component.js","sourceRoot":"","sources":["judgement.component.ts"],"names":[],"mappings":";;;;;;;;AAAA,sCAA0C;AAQ1C,IAAa,kBAAkB;IAN/B;QAOE,UAAK,GAAG,YAAY,CAAC;IACvB,CAAC;IAAD,yBAAC;AAAD,CAAC,AAFD,IAEC;AAFY,kBAAkB;IAN9B,gBAAS,CAAC;QACT,QAAQ,EAAE,wBAAwB;QAClC,WAAW,EAAE,4BAA4B;QACzC,SAAS,EAAE,CAAC,2BAA2B,CAAC;KACzC,CAAC;GAEW,kBAAkB,CAE9B;AAFY,gDAAkB"}

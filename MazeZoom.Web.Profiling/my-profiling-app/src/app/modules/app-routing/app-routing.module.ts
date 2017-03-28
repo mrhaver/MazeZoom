@@ -1,8 +1,10 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { OverviewComponent } from "app/components/overview/overview.component";
-import { JudgementComponent } from "app/components/judgement/judgement.component";
+import { JudgementComponent } from "../../components/judgement/judgement.component";
+import { OverviewComponent } from "../../components/overview/overview.component";
+
+
 
 const routes: Routes = [
   { path: 'judgement',  component: JudgementComponent },

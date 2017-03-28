@@ -1,16 +1,19 @@
+//MODULES
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
-import { ArtifactService } from "app/services/artifact.service";
-import { InMemoryDataService } from "app/data/in-memory-data.service";
+import { AppRoutingModule } from "../app-routing/app-routing.module";
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
-import { OverviewComponent } from "app/components/overview/overview.component";
-import { JudgementComponent } from "app/components/judgement/judgement.component";
-import { AppComponent } from "app/components/app/app.component";
-import { AppRoutingModule } from "app/modules/app-routing/app-routing.module";
+//SERVIES
+import { InMemoryDataService } from "../../data/in-memory-data.service";
+import { ArtifactService } from "../../services/artifact.service";
+
+//COMPONENTS
+import { AppComponent } from "../../components/app/app.component";
+import { JudgementComponent } from "../../components/judgement/judgement.component";
+import { OverviewComponent } from "../../components/overview/overview.component";
 
 
 @NgModule({
@@ -24,7 +27,7 @@ import { AppRoutingModule } from "app/modules/app-routing/app-routing.module";
     FormsModule,
     AppRoutingModule,
     HttpModule, 
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    InMemoryWebApiModule.forRoot(InMemoryDataService, {passThruUnknownUrl:true}),
   ],
   providers: [ArtifactService],
   bootstrap: [AppComponent]
