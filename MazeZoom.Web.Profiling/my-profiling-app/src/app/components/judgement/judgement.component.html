@@ -1,0 +1,46 @@
+<div class="container" *ngIf="currArtifact">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">                
+                <div class="col-md-10 col-md-offset-1">
+
+                    <h1 class="remainingNumber" align="center">
+                        {{remaining}}
+                    </h1>
+
+                    <div class="imageContainer maxWidth">
+
+                        <img src="{{currArtifact.imgSrc}}" class="imageSize">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar-fixed-bottom footerSize">
+        <div class="row">
+            <div class="col-md-1 col-md-offset-2">
+
+                <!--<input type="image" (click)="dislike()" align="right" src="./app/images/buttons/dislike.png" width="80%">-->
+                <input type="image" (click)="judge('DISLIKE')" align="right" src="./app/images/buttons/dislike.png" width="80%">
+
+            </div>
+            <div class="col-md-4 col-md-offset-1">
+
+                <p class="imageName" align="center">
+                    {{currArtifact.imgSrc}}
+                </p>
+
+            </div>
+            <div class="col-md-1 col-md-offset-1">
+
+                <!--<input type="image" (click)="like()" align="left" src="./app/images/buttons/like.png" width="80%">-->
+                <input type="image" (click)="judge('LIKE')" align="left" src="./app/images/buttons/like.png" width="80%">
+
+            </div>
+        </div>
+    </div>
+</div>

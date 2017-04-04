@@ -1,0 +1,24 @@
+body {
+    background-color: #F5F7F2;
+}
+.maxWidth {
+    width: 100%;
+}
+.imageSize {
+    display: block;
+    margin: auto;
+    border-radius: 10%;
+    max-width: 600px;
+    max-height:600px;
+}
+.imageContainer {
+    height: 600px;
+    width: 600px;
+}
+.footerSize {
+    height:100px;
+}
+.remainingNumber {
+    font-size: 50px;
+    padding: 5px;
+}
