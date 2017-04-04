@@ -20,7 +20,6 @@ export class JudgementComponent implements OnInit {
   constructor(private router: Router, private artifactService: ArtifactService) { }
 
   public ngOnInit(): void {
-    // this.getMockedArtifacts();
     this.getInitialArtifacts();
   }
 
@@ -35,13 +34,16 @@ export class JudgementComponent implements OnInit {
 
   public judge(judgement: Boolean): void {
     this.currArtifact.Judgement = (judgement ? Judgement.LIKE : Judgement.DISLIKE);
+    this.artifacts[this.index] = this.currArtifact;
     this.artifactService.postJudgedArtifact(this.artifacts).subscribe(returnedArtifacts => {
       console.log(returnedArtifacts);
       this.artifacts = returnedArtifacts;
       this.index++;
       this.remaining--;
-      if (this.index == (this.artifacts.length))
+      if (this.index == (this.artifacts.length)) {
+        localStorage.setItem('judgedArtifacts', JSON.stringify(this.artifacts));
         this.router.navigateByUrl('overview');
+      }
       this.currArtifact = this.artifacts[this.index];
     });
   }

@@ -27,7 +27,7 @@ namespace MazeZoom.Core.Profiling.Models
             this.Name = name;
             this.Date = date;
             this.Url = url;
-            this.Judgement = Judgement.NONE;
+            this.Judgement = judgement;
         }
         #endregion
 

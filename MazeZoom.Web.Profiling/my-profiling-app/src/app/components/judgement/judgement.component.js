@@ -21,7 +21,6 @@ var JudgementComponent = (function () {
         this.index = 0;
     }
     JudgementComponent.prototype.ngOnInit = function () {
-        // this.getMockedArtifacts();
         this.getInitialArtifacts();
     };
     JudgementComponent.prototype.getInitialArtifacts = function () {
@@ -36,13 +35,16 @@ var JudgementComponent = (function () {
     JudgementComponent.prototype.judge = function (judgement) {
         var _this = this;
         this.currArtifact.Judgement = (judgement ? judgement_1.Judgement.LIKE : judgement_1.Judgement.DISLIKE);
+        this.artifacts[this.index] = this.currArtifact;
         this.artifactService.postJudgedArtifact(this.artifacts).subscribe(function (returnedArtifacts) {
             console.log(returnedArtifacts);
             _this.artifacts = returnedArtifacts;
             _this.index++;
             _this.remaining--;
-            if (_this.index == (_this.artifacts.length))
+            if (_this.index == (_this.artifacts.length)) {
+                localStorage.setItem('judgedArtifacts', JSON.stringify(_this.artifacts));
                 _this.router.navigateByUrl('overview');
+            }
             _this.currArtifact = _this.artifacts[_this.index];
         });
     };

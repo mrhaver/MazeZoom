@@ -17,46 +17,38 @@ var OverviewComponent = (function () {
         this.artifacts = new Array();
     }
     OverviewComponent.prototype.ngOnInit = function () {
-        // this.getMockedArtifactsOverview();
+        this.indexFirst = 0;
+        this.indexSecond = 1;
+        this.indexThird = 2;
         this.getInitialArtifacts();
     };
     OverviewComponent.prototype.getInitialArtifacts = function () {
-        var _this = this;
-        this.artifactService.getInitialArtifacts().subscribe(function (returnedArtifacts) {
-            console.log(returnedArtifacts);
-            _this.artifacts = returnedArtifacts;
-        });
+        this.artifacts = JSON.parse(localStorage.getItem('judgedArtifacts'));
     };
+    OverviewComponent.prototype.next = function () {
+        this.indexFirst = this.loopUp(this.indexFirst);
+        this.indexSecond = this.loopUp(this.indexSecond);
+        this.indexThird = this.loopUp(this.indexThird);
+    };
+    OverviewComponent.prototype.previous = function () {
+        this.indexFirst = this.loopDown(this.indexFirst);
+        this.indexSecond = this.loopDown(this.indexSecond);
+        this.indexThird = this.loopDown(this.indexThird);
+    };
+    OverviewComponent.prototype.loopUp = function (number) {
+        number++;
+        return (number > (this.artifacts.length - 1) ? 0 : number);
+    };
+    OverviewComponent.prototype.loopDown = function (number) {
+        number--;
+        return (number < 0 ? (this.artifacts.length - 1) : number);
+    };
+    ////////// Mock Data Methods //////////
     OverviewComponent.prototype.getMockedArtifactsOverview = function () {
         var _this = this;
         this.artifactService.getMockedArtifacts().then(function (artifacts) {
             _this.artifacts = artifacts;
-            _this.indexFirst = 0;
-            _this.indexSecond = 1;
-            _this.indexThird = 2;
         });
-    };
-    OverviewComponent.prototype.next = function () {
-        this.indexFirst++;
-        this.indexSecond++;
-        this.indexThird++;
-        if (this.indexFirst > (this.artifacts.length - 1))
-            this.indexFirst = 0;
-        if (this.indexSecond > (this.artifacts.length - 1))
-            this.indexSecond = 0;
-        if (this.indexThird > (this.artifacts.length - 1))
-            this.indexThird = 0;
-    };
-    OverviewComponent.prototype.previous = function () {
-        this.indexFirst--;
-        this.indexSecond--;
-        this.indexThird--;
-        if (this.indexFirst < 0)
-            this.indexFirst = this.artifacts.length - 1;
-        if (this.indexSecond < 0)
-            this.indexSecond = this.artifacts.length - 1;
-        if (this.indexThird < 0)
-            this.indexThird = this.artifacts.length - 1;
     };
     return OverviewComponent;
 }());

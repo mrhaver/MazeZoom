@@ -50,7 +50,8 @@ namespace MazeZoom.API.Controllers.Test
                 DateTime date = Convert.ToDateTime(obj["Date"].ToString());
                 String url = obj["Url"].ToString();
                 Judgement judgement = (Judgement)Convert.ToInt32(obj["Judgement"]);
-                artifacts.Add(new Artifact(id, name, date, url, judgement));
+                Artifact artifact = new Artifact(id, name, date, url, judgement);
+                artifacts.Add(artifact);
             }            
             return Request.CreateResponse<IEnumerable<Artifact>>(HttpStatusCode.OK, artifacts);
         }

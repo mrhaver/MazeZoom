@@ -11,7 +11,7 @@ var router_1 = require("@angular/router");
 var judgement_component_1 = require("../../components/judgement/judgement.component");
 var overview_component_1 = require("../../components/overview/overview.component");
 var routes = [
-    { path: '', redirectTo: 'judgement' },
+    { path: '', redirectTo: '/judgement', pathMatch: 'full' },
     { path: 'judgement', component: judgement_component_1.JudgementComponent },
     { path: 'overview', component: overview_component_1.OverviewComponent },
 ];

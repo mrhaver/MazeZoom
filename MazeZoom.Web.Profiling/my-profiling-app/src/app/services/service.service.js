@@ -36,7 +36,7 @@ var GenericService = (function () {
             .catch(this.handleError);
     };
     GenericService.prototype.handleError = function (error) {
-        console.error('An error occurred', error); // for demo purposes only
+        console.error('An error occurred', error);
         return Observable_1.Observable.throw(error.message || error);
     };
     return GenericService;
