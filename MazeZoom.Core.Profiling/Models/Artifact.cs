@@ -7,19 +7,14 @@ namespace MazeZoom.Core.Profiling.Models
 {
     public class Artifact
     {
-        private int id;
-        private string name;
-        private DateTime date;
-        private string url;
-        private Judgement judgement;
 
         #region getters & setters
 
-        public int Id { get => id; set => id = value; }
-        public string Name { get => name; set => name = value; }
-        public DateTime Date { get => date; set => date = value; }
-        public string Url { get => url; set => url = value; }
-        public Judgement Judgement { get => judgement; set => judgement = value; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public DateTime Date { get; set; }
+        public string Url { get; set; }
+        public Judgement Judgement { get; set; }
 
         #endregion
 
@@ -28,11 +23,11 @@ namespace MazeZoom.Core.Profiling.Models
 
         public Artifact(int id, string name, DateTime date, string url, Judgement judgement)
         {
-            this.id = id;
-            this.name = name;
-            this.date = date;
-            this.url = url;
-            this.judgement = Judgement.NONE;
+            this.Id = id;
+            this.Name = name;
+            this.Date = date;
+            this.Url = url;
+            this.Judgement = Judgement.NONE;
         }
         #endregion
 
