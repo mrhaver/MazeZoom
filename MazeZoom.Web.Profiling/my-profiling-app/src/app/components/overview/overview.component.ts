@@ -25,7 +25,7 @@ export class OverviewComponent implements OnInit {
   // }
 
    getArtifactsOverview(): void {
-    this.artifactService.getArtifacts().then(artifacts => this.artifacts = artifacts)
+    this.artifactService.getMockedArtifacts().then(artifacts => this.artifacts = artifacts)
       .then(artifacts => {
         this.artifacts = artifacts;
       });

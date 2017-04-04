@@ -19,20 +19,12 @@ var JudgementComponent = (function () {
         this.index = 0;
     }
     JudgementComponent.prototype.ngOnInit = function () {
-        this.getArtifacts();
-        //this.getArtifactsApi();
+        this.getMockedArtifacts();
+        //this.getInitialArtifacts();
     };
-    JudgementComponent.prototype.getArtifacts = function () {
+    JudgementComponent.prototype.getInitialArtifacts = function () {
         var _this = this;
-        this.artifactService.getArtifacts().then(function (artifacts) { return _this.artifacts = artifacts; })
-            .then(function (artifacts) {
-            _this.currArtifact = artifacts[_this.index];
-            _this.remaining = artifacts.length;
-        });
-    };
-    JudgementComponent.prototype.getArtifactsApi = function () {
-        var _this = this;
-        this.artifactService.getArtifactsApi().subscribe(function (returnedJson) {
+        this.artifactService.getInitialArtifacts().subscribe(function (returnedJson) {
             console.log(returnedJson);
             _this.artifacts = returnedJson;
             _this.remaining = _this.artifacts.length;
@@ -40,11 +32,22 @@ var JudgementComponent = (function () {
         });
     };
     JudgementComponent.prototype.judge = function (judgement) {
-        this.name = this.currArtifact.url;
+        var _this = this;
         this.currArtifact.judgement = (judgement ? judgement_1.Judgement.LIKE : judgement_1.Judgement.DISLIKE);
-        this.index++;
-        this.remaining--;
-        this.currArtifact = this.artifacts[this.index];
+        this.artifactService.postJudgedArtifact(this.currArtifact, function () {
+            _this.index++;
+            _this.remaining--;
+            _this.currArtifact = _this.artifacts[_this.index];
+        });
+    };
+    ////////// Mock Data Methods //////////
+    JudgementComponent.prototype.getMockedArtifacts = function () {
+        var _this = this;
+        this.artifactService.getMockedArtifacts().then(function (artifacts) {
+            _this.artifacts = artifacts;
+            _this.currArtifact = artifacts[_this.index];
+            _this.remaining = artifacts.length;
+        });
     };
     return JudgementComponent;
 }());

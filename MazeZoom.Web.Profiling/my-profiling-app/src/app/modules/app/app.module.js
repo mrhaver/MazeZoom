@@ -20,6 +20,7 @@ var artifact_service_1 = require("../../services/artifact.service");
 var app_component_1 = require("../../components/app/app.component");
 var judgement_component_1 = require("../../components/judgement/judgement.component");
 var overview_component_1 = require("../../components/overview/overview.component");
+var service_service_1 = require("../../services/service.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -39,7 +40,7 @@ AppModule = __decorate([
             http_1.HttpModule,
             angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService, { passThruUnknownUrl: true }),
         ],
-        providers: [artifact_service_1.ArtifactService],
+        providers: [artifact_service_1.ArtifactService, service_service_1.GenericService],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);
