@@ -28,11 +28,14 @@ namespace MazeZoom.API.Controllers.Test
             return response;
         }
 
-        [Route("api/core/profiling/valuate/{artifactId}")]
+        [Route("api/core/profiling/valuate")]
         [HttpGet, HttpPost]
         public HttpResponseMessage ValuateArtifact(string artifactId)
         {
-            return Request.CreateResponse<string>(HttpStatusCode.OK, artifactId);
+
+            HttpResponseMessage response = Request.CreateResponse<string>(HttpStatusCode.OK, artifactId);
+            response.Headers.Add("Access-Control-Origin-Allow", "*");
+            return response;
         }
 
         // GET: api/Profiling/5
@@ -41,9 +44,14 @@ namespace MazeZoom.API.Controllers.Test
             return Ok("value");
         }
 
-        // POST: api/Profiling
+        [Route("api/core/profiling/post")]
+        [HttpPost]
         public void Post([FromBody]string value)
         {
+            if(value != null)
+            {
+                
+            }
         }
 
         // PUT: api/Profiling/5
