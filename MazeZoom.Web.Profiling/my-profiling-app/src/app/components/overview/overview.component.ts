@@ -15,19 +15,20 @@ export class OverviewComponent implements OnInit {
   artifacts = new Array<Artifact>();
 
   ngOnInit(): void {
-    this.getOverviewArtifactsApi();
+    this.getArtifactsOverview();
   }
 
-  getOverviewArtifactsApi(): void {
-    this.artifactService.getArtifactsApi().subscribe(artifacts=>{
-      this.artifacts = artifacts;
-    });
-  }
+  // getOverviewArtifactsApi(): void {
+  //   this.artifactService.getArtifactsApi().subscribe(artifacts=>{
+  //     this.artifacts = artifacts;
+  //   });
+  // }
 
-  getOverviewArtifacts(): void {
-    this.artifactService.getArtifacts().then(artifacts=>{
-
-    })
+   getArtifactsOverview(): void {
+    this.artifactService.getArtifacts().then(artifacts => this.artifacts = artifacts)
+      .then(artifacts => {
+        this.artifacts = artifacts;
+      });
   }
     
 }

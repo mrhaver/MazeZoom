@@ -1,13 +1,12 @@
-<div class="container" *ngFor="let artifact of artifacts">
+<div class="container">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4" *ngFor="let artifact of artifacts">
             <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-
-                    <div class="imageContainer maxWidth">
-                        <img src="{{artifact.imgSrc}}" class="imageSize">
+                <div class="col-md-12">
+                    <div class="imageContainerOverview">
+                        <img src="{{artifact.imgSrc}}"> 
+                        <p>{{artifact.value}}</p>
                     </div>
-
                 </div>
             </div>
         </div>
