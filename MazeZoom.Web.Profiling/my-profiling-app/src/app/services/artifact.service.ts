@@ -25,7 +25,7 @@ export class ArtifactService {
     }
 
     getArtifactsApi(): Observable<Artifact[]> {
-        const endPoint = 'api/Test';
+        const endPoint = 'api/core/profiling/getartifacts';
         const url = this.globalUrl + endPoint;
         let headers = new Headers({ 
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' 

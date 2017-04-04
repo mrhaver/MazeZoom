@@ -28,7 +28,7 @@ var ArtifactService = (function () {
         return Promise.resolve(mock_data_1.ARTIFACTS);
     };
     ArtifactService.prototype.getArtifactsApi = function () {
-        var endPoint = 'api/Test';
+        var endPoint = 'api/core/profiling/getartifacts';
         var url = this.globalUrl + endPoint;
         var headers = new http_1.Headers({
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
