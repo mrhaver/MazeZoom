@@ -1,8 +1,8 @@
 <div class="container" *ngIf="currArtifact">
 
-    <div class="row">
+    <div class="row vertical-align">
         <div class="col-md-12">
-            <div class="row">                
+            <div class="row">
                 <div class="col-md-10 col-md-offset-1">
 
                     <h1 class="remainingNumber" align="center">
@@ -13,11 +13,12 @@
 
                         <img src="{{currArtifact.url}}" class="imageSize">
 
-                    </div>
+                        <h3 class="artifactDescription" align="center">
+                            {{currArtifact.name}}
+                        </h3>
 
-                    <h3 class="artifactDescription" align="center">
-                        {{currArtifact.name}}
-                    </h3>
+                    </div>
+                    
                 </div>
             </div>
         </div>

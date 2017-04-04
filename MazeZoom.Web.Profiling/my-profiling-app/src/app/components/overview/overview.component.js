@@ -17,19 +17,44 @@ var OverviewComponent = (function () {
         this.artifacts = new Array();
     }
     OverviewComponent.prototype.ngOnInit = function () {
-        this.getArtifactsOverview();
+        this.getMockedArtifactsOverview();
     };
-    // getOverviewArtifactsApi(): void {
-    //   this.artifactService.getArtifactsApi().subscribe(artifacts=>{
-    //     this.artifacts = artifacts;
+    // private getInitialArtifacts(): void {
+    //   this.artifactService.getInitialArtifacts().subscribe(returnedArtifacts => {
+    //     console.log(returnedArtifacts);
+    //     this.artifacts = returnedArtifacts;
     //   });
     // }
-    OverviewComponent.prototype.getArtifactsOverview = function () {
+    OverviewComponent.prototype.getMockedArtifactsOverview = function () {
         var _this = this;
-        this.artifactService.getMockedArtifacts().then(function (artifacts) { return _this.artifacts = artifacts; })
-            .then(function (artifacts) {
+        this.artifactService.getMockedArtifacts().then(function (artifacts) {
             _this.artifacts = artifacts;
+            _this.indexFirst = 0;
+            _this.indexSecond = 1;
+            _this.indexThird = 2;
         });
+    };
+    OverviewComponent.prototype.next = function () {
+        this.indexFirst++;
+        this.indexSecond++;
+        this.indexThird++;
+        if (this.indexFirst > (this.artifacts.length - 1))
+            this.indexFirst = 0;
+        if (this.indexSecond > (this.artifacts.length - 1))
+            this.indexSecond = 0;
+        if (this.indexThird > (this.artifacts.length - 1))
+            this.indexThird = 0;
+    };
+    OverviewComponent.prototype.previous = function () {
+        this.indexFirst--;
+        this.indexSecond--;
+        this.indexThird--;
+        if (this.indexFirst < 0)
+            this.indexFirst = this.artifacts.length - 1;
+        if (this.indexSecond < 0)
+            this.indexSecond = this.artifacts.length - 1;
+        if (this.indexThird < 0)
+            this.indexThird = this.artifacts.length - 1;
     };
     return OverviewComponent;
 }());

@@ -1,14 +1,58 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-4" *ngFor="let artifact of artifacts">
+    <div class="row vertical-align">
+        <div class="col-md-4" *ngIf="artifacts && artifacts[indexFirst]">
             <div class="row">
                 <div class="col-md-12">
                     <div class="imageContainerOverview">
-                        <img src="{{artifact.imgSrc}}"> 
-                        <p>{{artifact.value}}</p>
+                        <div class="imageContainer maxWidth">
+
+                            <img src="{{artifacts[indexFirst].url}}" class="imageSize">
+
+                        </div>
+                        <p>{{artifacts[indexFirst].value}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4" *ngIf="artifacts && artifacts[indexSecond]">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="imageContainerOverview">
+                        <div class="imageContainer maxWidth">
+
+                            <img src="{{artifacts[indexSecond].url}}" class="imageSize">
+
+                        </div>
+                        <p>{{artifacts[indexSecond].value}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4" *ngIf="artifacts && artifacts[indexThird]">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="imageContainerOverview">
+                        <div class="imageContainer maxWidth">
+
+                            <img src="{{artifacts[indexThird].url}}" class="imageSize">
+
+                        </div>
+                        <p>{{artifacts[indexThird].value}}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="navbar-fixed-bottom">
+            <div class="row">
+                <div class="footer-col col-md-offset-3 col-md-6 col-md-offset-3 footerSize">
+                    <input class="footerImage" type="image" (click)="previous()" align="right" src="./app/images/buttons/right.png">
+                    <input class="footerImage" type="image" (click)="next()" align="left" src="./app/images/buttons/left.png">
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
