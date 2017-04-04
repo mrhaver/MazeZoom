@@ -12,8 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var artifact_service_1 = require("../../services/artifact.service");
 var judgement_1 = require("../../models/judgement");
+var router_1 = require("@angular/router");
 var JudgementComponent = (function () {
-    function JudgementComponent(artifactService) {
+    function JudgementComponent(router, artifactService) {
+        this.router = router;
         this.artifactService = artifactService;
         this.artifacts = new Array();
         this.index = 0;
@@ -39,6 +41,8 @@ var JudgementComponent = (function () {
             _this.artifacts = returnedArtifacts;
             _this.index++;
             _this.remaining--;
+            if (_this.index == (_this.artifacts.length))
+                _this.router.navigateByUrl('overview');
             _this.currArtifact = _this.artifacts[_this.index];
         });
     };
@@ -63,7 +67,7 @@ JudgementComponent = __decorate([
         templateUrl: './judgement.component.html',
         styleUrls: ['./judgement.component.css']
     }),
-    __metadata("design:paramtypes", [artifact_service_1.ArtifactService])
+    __metadata("design:paramtypes", [router_1.Router, artifact_service_1.ArtifactService])
 ], JudgementComponent);
 exports.JudgementComponent = JudgementComponent;
 //# sourceMappingURL=judgement.component.js.map

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Artifact } from "../../models/artifact";
 import { ArtifactService } from "../../services/artifact.service";
 import { Judgement } from "../../models/judgement";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'my-judgement-component',
@@ -16,7 +17,7 @@ export class JudgementComponent implements OnInit {
   public index = 0;
   public remaining: number;
 
-  constructor(private artifactService: ArtifactService) { }
+  constructor(private router: Router, private artifactService: ArtifactService) { }
 
   public ngOnInit(): void {
     this.getMockedArtifacts();
@@ -39,6 +40,8 @@ export class JudgementComponent implements OnInit {
       this.artifacts = returnedArtifacts;
       this.index++;
       this.remaining--;
+      if (this.index == (this.artifacts.length))
+        this.router.navigateByUrl('overview');
       this.currArtifact = this.artifacts[this.index];
     });
   }

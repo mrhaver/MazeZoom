@@ -7,6 +7,8 @@
                         <div class="imageContainer maxWidth">
 
                             <img src="{{artifacts[indexFirst].url}}" class="imageSize">
+                            <img src="./app/images/buttons/like.png" *ngIf="artifacts[indexFirst].judgement == 1" class="imageOnTop">
+                            <img src="./app/images/buttons/dislike.png" *ngIf="artifacts[indexFirst].judgement == 2" class="imageOnTop">
 
                         </div>
                         <p>{{artifacts[indexFirst].value}}</p>
@@ -21,6 +23,8 @@
                         <div class="imageContainer maxWidth">
 
                             <img src="{{artifacts[indexSecond].url}}" class="imageSize">
+                            <img src="./app/images/buttons/like.png" *ngIf="artifacts[indexSecond].judgement == 1" class="imageOnTop">
+                            <img src="./app/images/buttons/dislike.png" *ngIf="artifacts[indexSecond].judgement == 2" class="imageOnTop">
 
                         </div>
                         <p>{{artifacts[indexSecond].value}}</p>
@@ -35,6 +39,8 @@
                         <div class="imageContainer maxWidth">
 
                             <img src="{{artifacts[indexThird].url}}" class="imageSize">
+                            <img src="./app/images/buttons/like.png" *ngIf="artifacts[indexThird].judgement == 1" class="imageOnTop">
+                            <img src="./app/images/buttons/dislike.png" *ngIf="artifacts[indexThird].judgement == 2" class="imageOnTop">
 
                         </div>
                         <p>{{artifacts[indexThird].value}}</p>

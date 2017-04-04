@@ -10,12 +10,12 @@ import { Artifact } from "../../models/artifact";
 
 export class OverviewComponent implements OnInit {
 
-  constructor(private artifactService: ArtifactService, ) { }
-
   public artifacts = new Array<Artifact>();
   public indexFirst: number;
   public indexSecond: number;
   public indexThird: number;
+
+  constructor(private artifactService: ArtifactService, ) { }
 
   public ngOnInit(): void {
     this.getMockedArtifactsOverview();
