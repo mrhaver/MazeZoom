@@ -7,18 +7,32 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+/* reference
+ * https://docs.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/attribute-routing-in-web-api-2
+ */
+
 namespace MazeZoom.API.Controllers.Test
 {
     public class TestController : ApiController
     {
         // GET: api/Test
-        public IEnumerable<Artifact> Get()
+        [Route("api/core/profiling/getartifacts")]
+        public HttpResponseMessage Get()
         {
             Profiler p = new Profiler();
             TempMemoryCollection tmc = new TempMemoryCollection();
-            IEnumerable<Artifact> artifacts = tmc.Artifacts; 
-            
-            return artifacts;
+            IEnumerable<Artifact> artifacts = tmc.Artifacts;
+
+            HttpResponseMessage response = Request.CreateResponse<IEnumerable<Artifact>>(HttpStatusCode.OK, artifacts);
+            response.Headers.Add("Access-Control-Origin-Allow", "*");
+            return response;
+        }
+
+        [Route("api/core/profiling/valuate/{artifactId}")]
+        [HttpGet, HttpPost]
+        public HttpResponseMessage ValuateArtifact(string artifactId)
+        {
+            return Request.CreateResponse<string>(HttpStatusCode.OK, artifactId);
         }
 
         // GET: api/Profiling/5
