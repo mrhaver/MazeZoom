@@ -1,5 +1,5 @@
 body {
-    background-color: #F5F7F2;
+    background-color: beige;
 }
 .maxWidth {
     width: 100%;
@@ -13,12 +13,7 @@ body {
 }
 .imageContainer {
     height: 600px;
-    width: 600px;
 }
 .footerSize {
     height:100px;
-}
-.remainingNumber {
-    font-size: 50px;
-    padding: 5px;
 }

@@ -19,8 +19,8 @@ var JudgementComponent = (function () {
         this.index = 0;
     }
     JudgementComponent.prototype.ngOnInit = function () {
-        //this.getArtifacts();
-        this.getArtifactsApi();
+        this.getArtifacts();
+        //this.getArtifactsApi();
     };
     JudgementComponent.prototype.getArtifacts = function () {
         var _this = this;

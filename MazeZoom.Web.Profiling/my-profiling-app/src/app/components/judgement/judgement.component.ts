@@ -20,8 +20,8 @@ export class JudgementComponent implements OnInit {
   constructor(private artifactService: ArtifactService) { }
 
   ngOnInit(): void {
-    //this.getArtifacts();
-    this.getArtifactsApi();
+    this.getArtifacts();
+    //this.getArtifactsApi();
   }
 
 
