@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Artifact } from "../../models/artifact";
 import { ArtifactService } from "../../services/artifact.service";
+import { Judgement } from "../../models/judgement";
 
 @Component({
   selector: 'my-judgement-component',
@@ -35,31 +36,18 @@ export class JudgementComponent implements OnInit {
   getArtifactsApi(): void {
     this.artifactService.getArtifactsApi().subscribe(returnedJson => {
       console.log(returnedJson);
-
-    //   for (let index = 0; index < returnedJson.length; index++) {
-    //       this.artifacts.push(new Artifact());
-    //   }
-
-
-    //   console.log(imgStrings);
-    //   this.remaining = imgStrings.length;
-
-    //   for (let i = 0; i < imgStrings.length; i++) {
-
-    //     let a = new Artifact(i, imgStrings[i], '');
-    //     this.artifacts.push(a);
-
-    //   }
-    //   this.currArtifact = this.artifacts[this.index];
+      this.artifacts = returnedJson;
+      this.remaining = this.artifacts.length;
+      this.currArtifact = this.artifacts[this.index];
     });
   }
 
-  // public judge(judgement : string) : void {
-  //   this.name = this.currArtifact.imgSrc
-  //   this.currArtifact.value = judgement;
-  //   this.index++;
-  //   this.remaining--;
-  //   this.currArtifact = this.artifacts[this.index];
-  // }
+  public judge(judgement : Boolean) : void {
+    this.name = this.currArtifact.url
+    this.currArtifact.judgement = (judgement ? Judgement.LIKE : Judgement.DISLIKE);
+    this.index++;
+    this.remaining--;
+    this.currArtifact = this.artifacts[this.index];
+  }
 
 }
