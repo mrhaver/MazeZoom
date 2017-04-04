@@ -14,28 +14,26 @@ export class ArtifactService {
 
     constructor(private service: GenericService) { }
 
-    getInitialArtifacts(): Observable<Artifact[]> {
+    public getInitialArtifacts(): Observable<Artifact[]> {
         const url = this.globalUrl + 'api/core/profiling/getall';
         return this.service.getRequest(url);
     }
 
-    getJudgedArtifacts(): Observable<Artifact[]> {
+    public getJudgedArtifacts(): Observable<Artifact[]> {
         const url = this.globalUrl + 'api/core/profiling/getjudgedartifacts';
         return this.service.getRequest(url);
     }
 
-    postJudgedArtifact(artifact: Artifact, callback: () => void): void {
+    public postJudgedArtifact(artifacts: Artifact[]): Observable<Artifact[]> {
         const url = this.globalUrl + 'api/core/profiling/postjudgedartifacts';
-        let body = JSON.stringify(artifact);
+        let body = JSON.stringify(artifacts);
         console.log(body);
-        // this.service.postRequest(url, body).subscribe(result => {
-        //     callback();
-        // });
+        return this.service.postRequest(url, body);
     }
 
     ////////// Mock Data Methods //////////
 
-    getMockedArtifacts(): Promise<Artifact[]> {
+    public getMockedArtifacts(): Promise<Artifact[]> {
         return Promise.resolve(ARTIFACTS);
     }
 

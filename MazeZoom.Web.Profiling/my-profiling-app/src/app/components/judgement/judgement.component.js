@@ -19,23 +19,24 @@ var JudgementComponent = (function () {
         this.index = 0;
     }
     JudgementComponent.prototype.ngOnInit = function () {
-        //this.getMockedArtifacts();
-        this.getInitialArtifacts();
+        this.getMockedArtifacts();
+        //this.getInitialArtifacts();
     };
     JudgementComponent.prototype.getInitialArtifacts = function () {
         var _this = this;
-        this.artifactService.getInitialArtifacts().subscribe(function (returnedJson) {
-            console.log(returnedJson);
-            _this.artifacts = returnedJson;
+        this.artifactService.getInitialArtifacts().subscribe(function (returnedArtifacts) {
+            console.log(returnedArtifacts);
+            _this.artifacts = returnedArtifacts;
             _this.remaining = _this.artifacts.length;
             _this.currArtifact = _this.artifacts[_this.index];
         });
     };
     JudgementComponent.prototype.judge = function (judgement) {
         var _this = this;
-        this.name = this.currArtifact.url;
         this.currArtifact.judgement = (judgement ? judgement_1.Judgement.LIKE : judgement_1.Judgement.DISLIKE);
-        this.artifactService.postJudgedArtifact(this.currArtifact, function () {
+        this.artifactService.postJudgedArtifact(this.artifacts).subscribe(function (returnedArtifacts) {
+            console.log(returnedArtifacts);
+            _this.artifacts = returnedArtifacts;
             _this.index++;
             _this.remaining--;
             _this.currArtifact = _this.artifacts[_this.index];

@@ -15,28 +15,28 @@ export class JudgementComponent implements OnInit {
   public currArtifact: Artifact;
   public index = 0;
   public remaining: number;
-  public name: String;
 
   constructor(private artifactService: ArtifactService) { }
 
   public ngOnInit(): void {
-    //this.getMockedArtifacts();
-    this.getInitialArtifacts();
+    this.getMockedArtifacts();
+    //this.getInitialArtifacts();
   }
 
   private getInitialArtifacts(): void {
-    this.artifactService.getInitialArtifacts().subscribe(returnedJson => {
-      console.log(returnedJson);
-      this.artifacts = returnedJson;
+    this.artifactService.getInitialArtifacts().subscribe(returnedArtifacts => {
+      console.log(returnedArtifacts);
+      this.artifacts = returnedArtifacts;
       this.remaining = this.artifacts.length;
       this.currArtifact = this.artifacts[this.index];
     });
   }
 
   public judge(judgement: Boolean): void {
-    this.name = this.currArtifact.url
     this.currArtifact.judgement = (judgement ? Judgement.LIKE : Judgement.DISLIKE);
-    this.artifactService.postJudgedArtifact(this.currArtifact, (): void => {
+    this.artifactService.postJudgedArtifact(this.artifacts).subscribe(returnedArtifacts => {
+      console.log(returnedArtifacts);
+      this.artifacts = returnedArtifacts;
       this.index++;
       this.remaining--;
       this.currArtifact = this.artifacts[this.index];
@@ -54,7 +54,7 @@ export class JudgementComponent implements OnInit {
   }
 
   public getRemainingString(): String {
-    var remainingString = String(this.remaining);
+    let remainingString = String(this.remaining);
     return (this.remaining < 10 ? "0" + remainingString : remainingString)
   }
 

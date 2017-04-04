@@ -28,13 +28,11 @@ var ArtifactService = (function () {
         var url = this.globalUrl + 'api/core/profiling/getjudgedartifacts';
         return this.service.getRequest(url);
     };
-    ArtifactService.prototype.postJudgedArtifact = function (artifact, callback) {
+    ArtifactService.prototype.postJudgedArtifact = function (artifacts) {
         var url = this.globalUrl + 'api/core/profiling/postjudgedartifacts';
-        var body = JSON.stringify(artifact);
+        var body = JSON.stringify(artifacts);
         console.log(body);
-        // this.service.postRequest(url, body).subscribe(result => {
-        //     callback();
-        // });
+        return this.service.postRequest(url, body);
     };
     ////////// Mock Data Methods //////////
     ArtifactService.prototype.getMockedArtifacts = function () {
