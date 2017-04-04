@@ -20,17 +20,16 @@ var ArtifactService = (function () {
     function ArtifactService(http) {
         this.http = http;
         this.globalUrl = 'http://localhost:29409/';
+        this.headers = new http_1.Headers({
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        });
     }
     ArtifactService.prototype.getArtifacts = function () {
         return Promise.resolve(mock_data_1.ARTIFACTS);
     };
     ArtifactService.prototype.getArtifactsApi = function () {
-        var endPoint = 'api/Profiling';
-        var url = this.globalUrl + endPoint;
-        var headers = new http_1.Headers({
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-        });
-        return this.http.get(url, { headers: headers })
+        var url = this.globalUrl + 'api/core/profiling/getartifacts';
+        return this.http.get(url, { headers: this.headers })
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
     };

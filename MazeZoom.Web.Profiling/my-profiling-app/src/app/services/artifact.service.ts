@@ -14,6 +14,9 @@ import 'rxjs/add/operator/toPromise';
 export class ArtifactService {
 
     private globalUrl = 'http://localhost:29409/';
+    private headers = new Headers({
+        'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+    });
 
     constructor(private http: Http) { }
 
@@ -21,13 +24,9 @@ export class ArtifactService {
         return Promise.resolve(ARTIFACTS);
     }
 
-    getArtifactsApi(): Observable<string[]> {
-        const endPoint = 'api/Profiling';
-        const url = this.globalUrl + endPoint;
-        let headers = new Headers({ 
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' 
-        });
-        return this.http.get(url, {headers: headers})
+    getArtifactsApi(): Observable<Artifact[]> {
+        const url = this.globalUrl + 'api/core/profiling/getartifacts';
+        return this.http.get(url, {headers: this.headers})
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }

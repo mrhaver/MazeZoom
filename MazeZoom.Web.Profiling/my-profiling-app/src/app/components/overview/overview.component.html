@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" *ngFor="let artifact of artifacts">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="imageContainerOverview">
+                        <img src="{{artifact.imgSrc}}"> 
+                        <p>{{artifact.value}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

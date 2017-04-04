@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Artifact } from "../../models/artifact";
 import { ArtifactService } from "../../services/artifact.service";
+import { Judgement } from "../../models/judgement";
 
 @Component({
   selector: 'my-judgement-component',
@@ -10,17 +11,18 @@ import { ArtifactService } from "../../services/artifact.service";
 
 export class JudgementComponent implements OnInit {
 
+  public name: string;
+  public artifacts = new Array<Artifact>();
+  public currArtifact: Artifact;
+  public index = 0;
+  public remaining: number;
+
   constructor(private artifactService: ArtifactService) { }
 
   ngOnInit(): void {
-    //this.getArtifacts();
-    this.getArtifactsApi();
+    this.getArtifacts();
+    //this.getArtifactsApi();
   }
-  name: string;
-  artifacts = new Array<Artifact>();
-  currArtifact: Artifact;
-  index = 0;
-  remaining: number;
 
 
   getArtifacts(): void {
@@ -32,41 +34,20 @@ export class JudgementComponent implements OnInit {
   }
 
   getArtifactsApi(): void {
-    this.artifactService.getArtifactsApi().subscribe(imgStrings => {
-      console.log(imgStrings);
-      this.remaining = imgStrings.length;
-
-      for (let i = 0; i < imgStrings.length; i++) {
-
-        let a = new Artifact(i, imgStrings[i], '');
-        this.artifacts.push(a);
-
-      }
+    this.artifactService.getArtifactsApi().subscribe(returnedJson => {
+      console.log(returnedJson);
+      this.artifacts = returnedJson;
+      this.remaining = this.artifacts.length;
       this.currArtifact = this.artifacts[this.index];
     });
   }
 
-  public judge(judgement : string) : void {
-    this.name = this.currArtifact.imgSrc
-    this.currArtifact.value = judgement;
+  public judge(judgement : Boolean) : void {
+    this.name = this.currArtifact.url
+    this.currArtifact.judgement = (judgement ? Judgement.LIKE : Judgement.DISLIKE);
     this.index++;
     this.remaining--;
     this.currArtifact = this.artifacts[this.index];
   }
-
-  // like(): void {
-  //   this.name = this.currArtifact.imgSrc
-  //   this.currArtifact.value = 'LIKE';
-  //   this.index++;
-  //   this.remaining--;
-  //   this.currArtifact = this.artifacts[this.index];
-  // }
-  // dislike(): void {
-  //   this.name = 'DISLIKE';
-  //   this.currArtifact.value = 'DISLIKE';
-  //   this.index++;
-  //   this.remaining--;
-  //   this.currArtifact = this.artifacts[this.index];
-  // }
 
 }

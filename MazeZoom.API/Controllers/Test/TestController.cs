@@ -24,7 +24,7 @@ namespace MazeZoom.API.Controllers.Test
             IEnumerable<Artifact> artifacts = tmc.Artifacts;
 
             HttpResponseMessage response = Request.CreateResponse<IEnumerable<Artifact>>(HttpStatusCode.OK, artifacts);
-            response.Headers.Add("Access-Control-Origin-Allow", "*");
+            response.Headers.Add("Access-Control-Allow-Origin", "*");
             return response;
         }
 

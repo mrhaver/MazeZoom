@@ -1,0 +1,11 @@
+.footerImage {
+    height: 80px;
+    width: 80px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+.remainingNumber {
+    font-size: 50px;
+    padding: 5px;
+    color: grey;
+}
