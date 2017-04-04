@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var artifact_1 = require("../../models/artifact");
 var artifact_service_1 = require("../../services/artifact.service");
 var JudgementComponent = (function () {
     function JudgementComponent(artifactService) {
@@ -31,23 +30,19 @@ var JudgementComponent = (function () {
         });
     };
     JudgementComponent.prototype.getArtifactsApi = function () {
-        var _this = this;
-        this.artifactService.getArtifactsApi().subscribe(function (imgStrings) {
-            console.log(imgStrings);
-            _this.remaining = imgStrings.length;
-            for (var i = 0; i < imgStrings.length; i++) {
-                var a = new artifact_1.Artifact(i, imgStrings[i], '');
-                _this.artifacts.push(a);
-            }
-            _this.currArtifact = _this.artifacts[_this.index];
+        this.artifactService.getArtifactsApi().subscribe(function (returnedJson) {
+            console.log(returnedJson);
+            //   for (let index = 0; index < returnedJson.length; index++) {
+            //       this.artifacts.push(new Artifact());
+            //   }
+            //   console.log(imgStrings);
+            //   this.remaining = imgStrings.length;
+            //   for (let i = 0; i < imgStrings.length; i++) {
+            //     let a = new Artifact(i, imgStrings[i], '');
+            //     this.artifacts.push(a);
+            //   }
+            //   this.currArtifact = this.artifacts[this.index];
         });
-    };
-    JudgementComponent.prototype.judge = function (judgement) {
-        this.name = this.currArtifact.imgSrc;
-        this.currArtifact.value = judgement;
-        this.index++;
-        this.remaining--;
-        this.currArtifact = this.artifacts[this.index];
     };
     return JudgementComponent;
 }());
