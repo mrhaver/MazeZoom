@@ -12,11 +12,7 @@ export class GenericService {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     });
     private postHeaders = new Headers({
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization, X-PINGOTHER',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE'
+        'Content-Type': 'application/json; charset=UTF-8'
     });
 
     constructor(private http: Http) { }

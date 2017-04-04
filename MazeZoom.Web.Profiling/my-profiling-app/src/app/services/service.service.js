@@ -22,11 +22,7 @@ var GenericService = (function () {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         });
         this.postHeaders = new http_1.Headers({
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization, X-PINGOTHER',
-            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE'
+            'Content-Type': 'application/json; charset=UTF-8'
         });
     }
     GenericService.prototype.getRequest = function (url) {
