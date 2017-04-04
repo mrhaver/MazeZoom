@@ -10,6 +10,10 @@
                             <img src="./app/images/buttons/like.png" *ngIf="artifacts[indexFirst].judgement == 1" class="imageOnTop">
                             <img src="./app/images/buttons/dislike.png" *ngIf="artifacts[indexFirst].judgement == 2" class="imageOnTop">
 
+                            <h3 class="artifactDescription" align="center">
+                                {{artifacts[indexFirst].name}}
+                            </h3>
+
                         </div>
                         <p>{{artifacts[indexFirst].value}}</p>
                     </div>
@@ -26,6 +30,10 @@
                             <img src="./app/images/buttons/like.png" *ngIf="artifacts[indexSecond].judgement == 1" class="imageOnTop">
                             <img src="./app/images/buttons/dislike.png" *ngIf="artifacts[indexSecond].judgement == 2" class="imageOnTop">
 
+                            <h3 class="artifactDescription" align="center">
+                                {{artifacts[indexSecond].name}}
+                            </h3>
+
                         </div>
                         <p>{{artifacts[indexSecond].value}}</p>
                     </div>
@@ -41,6 +49,10 @@
                             <img src="{{artifacts[indexThird].url}}" class="imageSize">
                             <img src="./app/images/buttons/like.png" *ngIf="artifacts[indexThird].judgement == 1" class="imageOnTop">
                             <img src="./app/images/buttons/dislike.png" *ngIf="artifacts[indexThird].judgement == 2" class="imageOnTop">
+
+                            <h3 class="artifactDescription" align="center">
+                                {{artifacts[indexThird].name}}
+                            </h3>
 
                         </div>
                         <p>{{artifacts[indexThird].value}}</p>
