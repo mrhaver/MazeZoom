@@ -46,19 +46,27 @@ export class JudgementComponent implements OnInit {
     });
   }
 
-  like(): void {
+  public judge(judgement : string) : void {
     this.name = this.currArtifact.imgSrc
-    this.currArtifact.value = 'LIKE';
+    this.currArtifact.value = judgement;
     this.index++;
     this.remaining--;
     this.currArtifact = this.artifacts[this.index];
   }
-  dislike(): void {
-    this.name = 'DISLIKE';
-    this.currArtifact.value = 'DISLIKE';
-    this.index++;
-    this.remaining--;
-    this.currArtifact = this.artifacts[this.index];
-  }
+
+  // like(): void {
+  //   this.name = this.currArtifact.imgSrc
+  //   this.currArtifact.value = 'LIKE';
+  //   this.index++;
+  //   this.remaining--;
+  //   this.currArtifact = this.artifacts[this.index];
+  // }
+  // dislike(): void {
+  //   this.name = 'DISLIKE';
+  //   this.currArtifact.value = 'DISLIKE';
+  //   this.index++;
+  //   this.remaining--;
+  //   this.currArtifact = this.artifacts[this.index];
+  // }
 
 }

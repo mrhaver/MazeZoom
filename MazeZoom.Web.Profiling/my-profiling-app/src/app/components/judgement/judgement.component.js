@@ -42,16 +42,9 @@ var JudgementComponent = (function () {
             _this.currArtifact = _this.artifacts[_this.index];
         });
     };
-    JudgementComponent.prototype.like = function () {
+    JudgementComponent.prototype.judge = function (judgement) {
         this.name = this.currArtifact.imgSrc;
-        this.currArtifact.value = 'LIKE';
-        this.index++;
-        this.remaining--;
-        this.currArtifact = this.artifacts[this.index];
-    };
-    JudgementComponent.prototype.dislike = function () {
-        this.name = 'DISLIKE';
-        this.currArtifact.value = 'DISLIKE';
+        this.currArtifact.value = judgement;
         this.index++;
         this.remaining--;
         this.currArtifact = this.artifacts[this.index];
