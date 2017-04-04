@@ -13,10 +13,11 @@ export class JudgementComponent implements OnInit {
   constructor(private artifactService: ArtifactService) { }
 
   ngOnInit(): void {
-    this.getArtifacts();
+    //this.getArtifacts();
+    this.getArtifactsApi();
   }
   name: string;
-  artifacts: Artifact[];
+  artifacts = new Array<Artifact>();
   currArtifact: Artifact;
   index = 0;
   remaining: number;
@@ -31,24 +32,41 @@ export class JudgementComponent implements OnInit {
   }
 
   getArtifactsApi(): void {
-    this.artifactService.getArtifactsApi().subscribe(artifacts => {
-      console.log(artifacts);
-    })
+    this.artifactService.getArtifactsApi().subscribe(imgStrings => {
+      console.log(imgStrings);
+      this.remaining = imgStrings.length;
+
+      for (let i = 0; i < imgStrings.length; i++) {
+
+        let a = new Artifact(i, imgStrings[i], '');
+        this.artifacts.push(a);
+
+      }
+      this.currArtifact = this.artifacts[this.index];
+    });
   }
 
-  like(): void {
+  public judge(judgement : string) : void {
     this.name = this.currArtifact.imgSrc
-    this.currArtifact.value = 'LIKE';
+    this.currArtifact.value = judgement;
     this.index++;
     this.remaining--;
     this.currArtifact = this.artifacts[this.index];
   }
-  dislike(): void {
-    this.name = 'DISLIKE';
-    this.currArtifact.value = 'DISLIKE';
-    this.index++;
-    this.remaining--;
-    this.currArtifact = this.artifacts[this.index];
-  }
+
+  // like(): void {
+  //   this.name = this.currArtifact.imgSrc
+  //   this.currArtifact.value = 'LIKE';
+  //   this.index++;
+  //   this.remaining--;
+  //   this.currArtifact = this.artifacts[this.index];
+  // }
+  // dislike(): void {
+  //   this.name = 'DISLIKE';
+  //   this.currArtifact.value = 'DISLIKE';
+  //   this.index++;
+  //   this.remaining--;
+  //   this.currArtifact = this.artifacts[this.index];
+  // }
 
 }

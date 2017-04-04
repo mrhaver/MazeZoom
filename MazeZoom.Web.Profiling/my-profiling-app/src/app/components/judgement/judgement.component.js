@@ -10,14 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var artifact_1 = require("../../models/artifact");
 var artifact_service_1 = require("../../services/artifact.service");
 var JudgementComponent = (function () {
     function JudgementComponent(artifactService) {
         this.artifactService = artifactService;
+        this.artifacts = new Array();
         this.index = 0;
     }
     JudgementComponent.prototype.ngOnInit = function () {
-        this.getArtifacts();
+        //this.getArtifacts();
+        this.getArtifactsApi();
     };
     JudgementComponent.prototype.getArtifacts = function () {
         var _this = this;
@@ -28,20 +31,20 @@ var JudgementComponent = (function () {
         });
     };
     JudgementComponent.prototype.getArtifactsApi = function () {
-        this.artifactService.getArtifactsApi().subscribe(function (artifacts) {
-            console.log(artifacts);
+        var _this = this;
+        this.artifactService.getArtifactsApi().subscribe(function (imgStrings) {
+            console.log(imgStrings);
+            _this.remaining = imgStrings.length;
+            for (var i = 0; i < imgStrings.length; i++) {
+                var a = new artifact_1.Artifact(i, imgStrings[i], '');
+                _this.artifacts.push(a);
+            }
+            _this.currArtifact = _this.artifacts[_this.index];
         });
     };
-    JudgementComponent.prototype.like = function () {
+    JudgementComponent.prototype.judge = function (judgement) {
         this.name = this.currArtifact.imgSrc;
-        this.currArtifact.value = 'LIKE';
-        this.index++;
-        this.remaining--;
-        this.currArtifact = this.artifacts[this.index];
-    };
-    JudgementComponent.prototype.dislike = function () {
-        this.name = 'DISLIKE';
-        this.currArtifact.value = 'DISLIKE';
+        this.currArtifact.value = judgement;
         this.index++;
         this.remaining--;
         this.currArtifact = this.artifacts[this.index];
