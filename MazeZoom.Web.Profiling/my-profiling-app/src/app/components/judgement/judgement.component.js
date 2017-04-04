@@ -46,6 +46,10 @@ var JudgementComponent = (function () {
         this.remaining--;
         this.currArtifact = this.artifacts[this.index];
     };
+    JudgementComponent.prototype.getRemainingString = function () {
+        var remainingString = String(this.remaining);
+        return (this.remaining < 10 ? "0" + remainingString : remainingString);
+    };
     return JudgementComponent;
 }());
 JudgementComponent = __decorate([

@@ -42,12 +42,17 @@ export class JudgementComponent implements OnInit {
     });
   }
 
-  public judge(judgement : Boolean) : void {
+  public judge(judgement: Boolean): void {
     this.name = this.currArtifact.url
     this.currArtifact.judgement = (judgement ? Judgement.LIKE : Judgement.DISLIKE);
     this.index++;
     this.remaining--;
     this.currArtifact = this.artifacts[this.index];
+  }
+
+  public getRemainingString(): String {
+    var remainingString = String(this.remaining);
+    return (this.remaining < 10 ? "0" + remainingString : remainingString)
   }
 
 }
