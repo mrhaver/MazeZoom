@@ -26,7 +26,7 @@ var OverviewComponent = (function () {
     // }
     OverviewComponent.prototype.getArtifactsOverview = function () {
         var _this = this;
-        this.artifactService.getArtifacts().then(function (artifacts) { return _this.artifacts = artifacts; })
+        this.artifactService.getMockedArtifacts().then(function (artifacts) { return _this.artifacts = artifacts; })
             .then(function (artifacts) {
             _this.artifacts = artifacts;
         });

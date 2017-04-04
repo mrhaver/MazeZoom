@@ -11,30 +11,21 @@ import { Judgement } from "../../models/judgement";
 
 export class JudgementComponent implements OnInit {
 
-  public name: string;
   public artifacts = new Array<Artifact>();
   public currArtifact: Artifact;
   public index = 0;
   public remaining: number;
+  public name: String;
 
   constructor(private artifactService: ArtifactService) { }
 
-  ngOnInit(): void {
-    this.getArtifacts();
-    //this.getArtifactsApi();
+  public ngOnInit(): void {
+    //this.getMockedArtifacts();
+    this.getInitialArtifacts();
   }
 
-
-  getArtifacts(): void {
-    this.artifactService.getArtifacts().then(artifacts => this.artifacts = artifacts)
-      .then(artifacts => {
-        this.currArtifact = artifacts[this.index];
-        this.remaining = artifacts.length;
-      });
-  }
-
-  getArtifactsApi(): void {
-    this.artifactService.getArtifactsApi().subscribe(returnedJson => {
+  private getInitialArtifacts(): void {
+    this.artifactService.getInitialArtifacts().subscribe(returnedJson => {
       console.log(returnedJson);
       this.artifacts = returnedJson;
       this.remaining = this.artifacts.length;
@@ -45,9 +36,21 @@ export class JudgementComponent implements OnInit {
   public judge(judgement: Boolean): void {
     this.name = this.currArtifact.url
     this.currArtifact.judgement = (judgement ? Judgement.LIKE : Judgement.DISLIKE);
-    this.index++;
-    this.remaining--;
-    this.currArtifact = this.artifacts[this.index];
+    this.artifactService.postJudgedArtifact(this.currArtifact, (): void => {
+      this.index++;
+      this.remaining--;
+      this.currArtifact = this.artifacts[this.index];
+    });
+  }
+
+  ////////// Mock Data Methods //////////
+
+  private getMockedArtifacts(): void {
+    this.artifactService.getMockedArtifacts().then(artifacts => {
+      this.artifacts = artifacts;
+      this.currArtifact = artifacts[this.index];
+      this.remaining = artifacts.length;
+    });
   }
 
   public getRemainingString(): String {

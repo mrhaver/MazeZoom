@@ -14,6 +14,7 @@ import { ArtifactService } from "../../services/artifact.service";
 import { AppComponent } from "../../components/app/app.component";
 import { JudgementComponent } from "../../components/judgement/judgement.component";
 import { OverviewComponent } from "../../components/overview/overview.component";
+import { GenericService } from "../../services/service.service";
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { OverviewComponent } from "../../components/overview/overview.component"
     HttpModule, 
     InMemoryWebApiModule.forRoot(InMemoryDataService, {passThruUnknownUrl:true}),
   ],
-  providers: [ArtifactService],
+  providers: [ArtifactService, GenericService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
