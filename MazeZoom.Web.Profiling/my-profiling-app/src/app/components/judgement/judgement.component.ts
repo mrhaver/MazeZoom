@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Artifact } from "../../models/artifact";
 import { ArtifactService } from "../../services/artifact.service";
 import { Judgement } from "../../models/judgement";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'my-judgement-component',
@@ -11,43 +12,53 @@ import { Judgement } from "../../models/judgement";
 
 export class JudgementComponent implements OnInit {
 
-  public name: string;
   public artifacts = new Array<Artifact>();
   public currArtifact: Artifact;
   public index = 0;
   public remaining: number;
 
-  constructor(private artifactService: ArtifactService) { }
+  constructor(private router: Router, private artifactService: ArtifactService) { }
 
-  ngOnInit(): void {
-    this.getArtifacts();
-    //this.getArtifactsApi();
+  public ngOnInit(): void {
+    this.getMockedArtifacts();
+    //this.getInitialArtifacts();
   }
 
-
-  getArtifacts(): void {
-    this.artifactService.getArtifacts().then(artifacts => this.artifacts = artifacts)
-      .then(artifacts => {
-        this.currArtifact = artifacts[this.index];
-        this.remaining = artifacts.length;
-      });
-  }
-
-  getArtifactsApi(): void {
-    this.artifactService.getArtifactsApi().subscribe(returnedJson => {
-      console.log(returnedJson);
-      this.artifacts = returnedJson;
+  private getInitialArtifacts(): void {
+    this.artifactService.getInitialArtifacts().subscribe(returnedArtifacts => {
+      console.log(returnedArtifacts);
+      this.artifacts = returnedArtifacts;
       this.remaining = this.artifacts.length;
       this.currArtifact = this.artifacts[this.index];
     });
   }
 
-  public judge(judgement : Boolean) : void {
-    this.name = this.currArtifact.url
+  public judge(judgement: Boolean): void {
     this.currArtifact.judgement = (judgement ? Judgement.LIKE : Judgement.DISLIKE);
-    this.index++;
-    this.remaining--;
-    this.currArtifact = this.artifacts[this.index];
+    this.artifactService.postJudgedArtifact(this.artifacts).subscribe(returnedArtifacts => {
+      console.log(returnedArtifacts);
+      this.artifacts = returnedArtifacts;
+      this.index++;
+      this.remaining--;
+      if (this.index == (this.artifacts.length))
+        this.router.navigateByUrl('overview');
+      this.currArtifact = this.artifacts[this.index];
+    });
+  }
+
+  ////////// Mock Data Methods //////////
+
+  private getMockedArtifacts(): void {
+    this.artifactService.getMockedArtifacts().then(artifacts => {
+      this.artifacts = artifacts;
+      this.currArtifact = artifacts[this.index];
+      this.remaining = artifacts.length;
+    });
+  }
+
+  public getRemainingString(): String {
+    let remainingString = String(this.remaining);
+    return (this.remaining < 10 ? "0" + remainingString : remainingString)
   }
 
 }

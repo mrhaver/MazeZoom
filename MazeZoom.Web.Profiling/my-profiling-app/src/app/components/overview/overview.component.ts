@@ -10,25 +10,55 @@ import { Artifact } from "../../models/artifact";
 
 export class OverviewComponent implements OnInit {
 
-  constructor(private artifactService: ArtifactService, ){}
+  public artifacts = new Array<Artifact>();
+  public indexFirst: number;
+  public indexSecond: number;
+  public indexThird: number;
 
-  artifacts = new Array<Artifact>();
+  constructor(private artifactService: ArtifactService, ) { }
 
-  ngOnInit(): void {
-    this.getArtifactsOverview();
+  public ngOnInit(): void {
+    this.getMockedArtifactsOverview();
   }
 
-  // getOverviewArtifactsApi(): void {
-  //   this.artifactService.getArtifactsApi().subscribe(artifacts=>{
-  //     this.artifacts = artifacts;
+  // private getInitialArtifacts(): void {
+  //   this.artifactService.getInitialArtifacts().subscribe(returnedArtifacts => {
+  //     console.log(returnedArtifacts);
+  //     this.artifacts = returnedArtifacts;
   //   });
   // }
 
-   getArtifactsOverview(): void {
-    this.artifactService.getArtifacts().then(artifacts => this.artifacts = artifacts)
-      .then(artifacts => {
-        this.artifacts = artifacts;
-      });
+  public getMockedArtifactsOverview(): void {
+    this.artifactService.getMockedArtifacts().then(artifacts => {
+      this.artifacts = artifacts;
+      this.indexFirst = 0;
+      this.indexSecond = 1;
+      this.indexThird = 2;
+    });
   }
-    
+
+  public next(): void {
+    this.indexFirst++;
+    this.indexSecond++;
+    this.indexThird++;
+    if (this.indexFirst > (this.artifacts.length - 1))
+      this.indexFirst = 0;
+    if (this.indexSecond > (this.artifacts.length - 1))
+      this.indexSecond = 0;      
+    if (this.indexThird > (this.artifacts.length - 1))
+      this.indexThird = 0;    
+  }
+
+  public previous(): void {
+    this.indexFirst--;
+    this.indexSecond--;
+    this.indexThird--;
+    if (this.indexFirst < 0)
+      this.indexFirst = this.artifacts.length - 1;
+    if (this.indexSecond < 0) 
+      this.indexSecond = this.artifacts.length - 1;      
+    if (this.indexThird < 0) 
+      this.indexThird = this.artifacts.length - 1;
+  }
+
 }
