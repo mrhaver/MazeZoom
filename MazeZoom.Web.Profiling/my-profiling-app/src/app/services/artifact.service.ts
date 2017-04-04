@@ -20,12 +20,12 @@ export class ArtifactService {
     }
 
     public getJudgedArtifacts(): Observable<Artifact[]> {
-        const url = this.globalUrl + 'api/core/profiling/getjudgedartifacts';
+        const url = this.globalUrl + 'api/core/profiling/getallresults';
         return this.service.getRequest(url);
     }
 
     public postJudgedArtifact(artifacts: Artifact[]): Observable<Artifact[]> {
-        const url = this.globalUrl + 'api/core/profiling/postjudgedartifacts';
+        const url = this.globalUrl + 'api/core/profiling/postjudge';
         //let body = JSON.stringify(artifacts);
         let body = JSON.stringify({ 'artifacts' : artifacts });
         console.log(body);

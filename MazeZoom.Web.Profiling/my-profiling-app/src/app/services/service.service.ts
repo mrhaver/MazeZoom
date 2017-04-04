@@ -8,20 +8,27 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class GenericService {
 
-    private headers = new Headers({
+    private getHeaders = new Headers({
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    });
+    private postHeaders = new Headers({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization, X-PINGOTHER',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE'
     });
 
     constructor(private http: Http) { }
 
     public getRequest(url: string): Observable<any> {
-        return this.http.get(url, { headers: this.headers })
+        return this.http.get(url, { headers: this.getHeaders })
             .map((response: Response) => response.json())
             .catch(this.handleError);
     }
 
     public postRequest(url: string, body: string): Observable<any> {
-        return this.http.post(url, body, { headers: this.headers })
+        return this.http.post(url, body, { headers: this.postHeaders })
             .map((response: Response) => response.json())
             .catch(this.handleError);
     }

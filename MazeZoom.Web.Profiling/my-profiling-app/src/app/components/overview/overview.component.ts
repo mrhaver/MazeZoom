@@ -18,15 +18,16 @@ export class OverviewComponent implements OnInit {
   constructor(private artifactService: ArtifactService, ) { }
 
   public ngOnInit(): void {
-    this.getMockedArtifactsOverview();
+    // this.getMockedArtifactsOverview();
+    this.getInitialArtifacts();
   }
 
-  // private getInitialArtifacts(): void {
-  //   this.artifactService.getInitialArtifacts().subscribe(returnedArtifacts => {
-  //     console.log(returnedArtifacts);
-  //     this.artifacts = returnedArtifacts;
-  //   });
-  // }
+  private getInitialArtifacts(): void {
+    this.artifactService.getInitialArtifacts().subscribe(returnedArtifacts => {
+      console.log(returnedArtifacts);
+      this.artifacts = returnedArtifacts;
+    });
+  }
 
   public getMockedArtifactsOverview(): void {
     this.artifactService.getMockedArtifacts().then(artifacts => {
@@ -44,9 +45,9 @@ export class OverviewComponent implements OnInit {
     if (this.indexFirst > (this.artifacts.length - 1))
       this.indexFirst = 0;
     if (this.indexSecond > (this.artifacts.length - 1))
-      this.indexSecond = 0;      
+      this.indexSecond = 0;
     if (this.indexThird > (this.artifacts.length - 1))
-      this.indexThird = 0;    
+      this.indexThird = 0;
   }
 
   public previous(): void {
@@ -55,9 +56,9 @@ export class OverviewComponent implements OnInit {
     this.indexThird--;
     if (this.indexFirst < 0)
       this.indexFirst = this.artifacts.length - 1;
-    if (this.indexSecond < 0) 
-      this.indexSecond = this.artifacts.length - 1;      
-    if (this.indexThird < 0) 
+    if (this.indexSecond < 0)
+      this.indexSecond = this.artifacts.length - 1;
+    if (this.indexThird < 0)
       this.indexThird = this.artifacts.length - 1;
   }
 

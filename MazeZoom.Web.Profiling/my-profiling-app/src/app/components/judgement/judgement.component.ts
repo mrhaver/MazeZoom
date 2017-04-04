@@ -20,8 +20,8 @@ export class JudgementComponent implements OnInit {
   constructor(private router: Router, private artifactService: ArtifactService) { }
 
   public ngOnInit(): void {
-    this.getMockedArtifacts();
-    //this.getInitialArtifacts();
+    // this.getMockedArtifacts();
+    this.getInitialArtifacts();
   }
 
   private getInitialArtifacts(): void {
@@ -34,7 +34,7 @@ export class JudgementComponent implements OnInit {
   }
 
   public judge(judgement: Boolean): void {
-    this.currArtifact.judgement = (judgement ? Judgement.LIKE : Judgement.DISLIKE);
+    this.currArtifact.Judgement = (judgement ? Judgement.LIKE : Judgement.DISLIKE);
     this.artifactService.postJudgedArtifact(this.artifacts).subscribe(returnedArtifacts => {
       console.log(returnedArtifacts);
       this.artifacts = returnedArtifacts;

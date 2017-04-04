@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Artifact = (function () {
-    function Artifact(id, name, date, url, judgement) {
-        this.id = id;
-        this.name = name;
-        this.date = date;
-        this.url = url;
-        this.judgement = judgement;
+    function Artifact(Id, Name, Date, Url, Judgement) {
+        this.Id = Id;
+        this.Name = Name;
+        this.Date = Date;
+        this.Url = Url;
+        this.Judgement = Judgement;
     }
     return Artifact;
 }());

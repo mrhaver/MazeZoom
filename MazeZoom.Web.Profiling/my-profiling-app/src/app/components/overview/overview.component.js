@@ -17,14 +17,16 @@ var OverviewComponent = (function () {
         this.artifacts = new Array();
     }
     OverviewComponent.prototype.ngOnInit = function () {
-        this.getMockedArtifactsOverview();
+        // this.getMockedArtifactsOverview();
+        this.getInitialArtifacts();
     };
-    // private getInitialArtifacts(): void {
-    //   this.artifactService.getInitialArtifacts().subscribe(returnedArtifacts => {
-    //     console.log(returnedArtifacts);
-    //     this.artifacts = returnedArtifacts;
-    //   });
-    // }
+    OverviewComponent.prototype.getInitialArtifacts = function () {
+        var _this = this;
+        this.artifactService.getInitialArtifacts().subscribe(function (returnedArtifacts) {
+            console.log(returnedArtifacts);
+            _this.artifacts = returnedArtifacts;
+        });
+    };
     OverviewComponent.prototype.getMockedArtifactsOverview = function () {
         var _this = this;
         this.artifactService.getMockedArtifacts().then(function (artifacts) {

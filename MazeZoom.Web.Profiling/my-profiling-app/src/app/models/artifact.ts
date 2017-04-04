@@ -1,6 +1,6 @@
 import { Judgement } from "./judgement";
 
 export class Artifact {
-    constructor(public id: number, public name: string, public date: Date, public url: string, public judgement: Judgement) {
+    constructor(public Id: number, public Name: string, public Date: Date, public Url: string, public Judgement: Judgement) {
     }
 }

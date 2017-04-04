@@ -3,6 +3,7 @@ using MazeZoom.Core.Profiling.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -26,7 +27,7 @@ namespace MazeZoom.API.Controllers.Test
             IEnumerable<Artifact> artifacts = tmc.Artifacts;
 
             HttpResponseMessage response = Request.CreateResponse<IEnumerable<Artifact>>(HttpStatusCode.OK, artifacts);
-            response.Headers.Add("Access-Control-Allow-Origin", "*");
+            //response.Headers.Add("Access-Control-Allow-Origin", "*");
             return response;
         }
 
@@ -38,7 +39,7 @@ namespace MazeZoom.API.Controllers.Test
             IEnumerable<Artifact> artifacts = tmc.Artifacts;
 
             HttpResponseMessage response = Request.CreateResponse<IEnumerable<Artifact>>(HttpStatusCode.OK, artifacts);
-            response.Headers.Add("Access-Control-Allow-Origin", "*");
+            //response.Headers.Add("Access-Control-Allow-Origin", "*");
             return response;
         }
 
@@ -56,29 +57,34 @@ namespace MazeZoom.API.Controllers.Test
         }*/
 
         [Route("api/core/profiling/postjudge")]
-        [HttpPost]
-        public String Post([FromBody]dynamic value)
+        //[HttpPost]
+        public HttpResponseMessage Post([FromBody]dynamic value)
         {
             //var x = value.artifacts; // JToken
 
             //String jsonString = Convert.ToString(value.artifacts);
             //dynamic results = JsonConvert.DeserializeObject<Artifact>(jsonString);
 
-            /*String jsonString = Convert.ToString(value.artifacts);
-         
+            String jsonString = Convert.ToString(value.artifacts);
+            List<Artifact> artifacts = new List<Artifact>();
             JArray array = JArray.Parse(jsonString);
             foreach (JObject obj in array.Children<JObject>())
             {
-                int id = Convert.ToInt32(obj["id"]);
-                String name = obj["name"].ToString();
-                DateTime date = Convert.ToDateTime(obj["date"].ToString());
-                String url = obj["url"].ToString();
-                Judgement judgement = (Judgement)Convert.ToInt32(obj["judgement"]);
+                int id = Convert.ToInt32(obj["Id"]);
+                String name = obj["Name"].ToString();
+                DateTime date = Convert.ToDateTime(obj["Date"].ToString());
+                String url = obj["Url"].ToString();
+                Judgement judgement = (Judgement)Convert.ToInt32(obj["Judgement"]);
 
-                new Artifact(id, name, date, url, judgement);
-            }*/
+                artifacts.Add(new Artifact(id, name, date, url, judgement));
+            }
 
-            return Convert.ToString(value);
+            HttpResponseMessage response = Request.CreateResponse<IEnumerable<Artifact>>(HttpStatusCode.OK, artifacts);
+            
+            //response.Headers.Add("Access-Control-Allow-Origin", "*");
+            //response.Headers.Add("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-PINGOTHER");
+            //response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+            return response;
         }
 
         // GET: api/Profiling/5

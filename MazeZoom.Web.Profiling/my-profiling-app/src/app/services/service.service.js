@@ -18,17 +18,24 @@ require("rxjs/add/operator/toPromise");
 var GenericService = (function () {
     function GenericService(http) {
         this.http = http;
-        this.headers = new http_1.Headers({
+        this.getHeaders = new http_1.Headers({
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        });
+        this.postHeaders = new http_1.Headers({
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization, X-PINGOTHER',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE'
         });
     }
     GenericService.prototype.getRequest = function (url) {
-        return this.http.get(url, { headers: this.headers })
+        return this.http.get(url, { headers: this.getHeaders })
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     GenericService.prototype.postRequest = function (url, body) {
-        return this.http.post(url, body, { headers: this.headers })
+        return this.http.post(url, body, { headers: this.postHeaders })
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };

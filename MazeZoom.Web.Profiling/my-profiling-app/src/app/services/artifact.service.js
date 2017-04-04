@@ -25,11 +25,11 @@ var ArtifactService = (function () {
         return this.service.getRequest(url);
     };
     ArtifactService.prototype.getJudgedArtifacts = function () {
-        var url = this.globalUrl + 'api/core/profiling/getjudgedartifacts';
+        var url = this.globalUrl + 'api/core/profiling/getallresults';
         return this.service.getRequest(url);
     };
     ArtifactService.prototype.postJudgedArtifact = function (artifacts) {
-        var url = this.globalUrl + 'api/core/profiling/postjudgedartifacts';
+        var url = this.globalUrl + 'api/core/profiling/postjudge';
         //let body = JSON.stringify(artifacts);
         var body = JSON.stringify({ 'artifacts': artifacts });
         console.log(body);
