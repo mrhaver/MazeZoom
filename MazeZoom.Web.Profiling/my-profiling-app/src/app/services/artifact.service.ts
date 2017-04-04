@@ -26,7 +26,8 @@ export class ArtifactService {
 
     public postJudgedArtifact(artifacts: Artifact[]): Observable<Artifact[]> {
         const url = this.globalUrl + 'api/core/profiling/postjudgedartifacts';
-        let body = JSON.stringify(artifacts);
+        //let body = JSON.stringify(artifacts);
+        let body = JSON.stringify({ 'artifacts' : artifacts });
         console.log(body);
         return this.service.postRequest(url, body);
     }

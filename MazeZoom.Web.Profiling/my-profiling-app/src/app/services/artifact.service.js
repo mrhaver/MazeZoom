@@ -30,7 +30,8 @@ var ArtifactService = (function () {
     };
     ArtifactService.prototype.postJudgedArtifact = function (artifacts) {
         var url = this.globalUrl + 'api/core/profiling/postjudgedartifacts';
-        var body = JSON.stringify(artifacts);
+        //let body = JSON.stringify(artifacts);
+        var body = JSON.stringify({ 'artifacts': artifacts });
         console.log(body);
         return this.service.postRequest(url, body);
     };
