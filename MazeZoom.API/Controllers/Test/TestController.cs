@@ -1,4 +1,5 @@
 ﻿using MazeZoom.Core.Profiling;
+using MazeZoom.Core.Profiling.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,16 +7,18 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace MazeZoom.API.Controllers.Profiling
+namespace MazeZoom.API.Controllers.Test
 {
-    public class ProfilingController : ApiController
+    public class TestController : ApiController
     {
-        // GET: api/Profiling
-        public IEnumerable<string> Get()
+        // GET: api/Test
+        public IEnumerable<Artifact> Get()
         {
             Profiler p = new Profiler();
-
-            return p.GetItems();
+            TempMemoryCollection tmc = new TempMemoryCollection();
+            IEnumerable<Artifact> artifacts = tmc.Artifacts; 
+            
+            return artifacts;
         }
 
         // GET: api/Profiling/5
