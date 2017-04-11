@@ -12,7 +12,8 @@
                     <div class="imageContainer maxWidth">
 
                         <img src="{{currArtifact.Url}}" class="imageSize" [@fadeInAnimation]="getJudgementValue()" [@flyOutAnimation]="getJudgementValue()"
-                            (@flyOutAnimation.done)="processAnimation($event)" (click)="modal.show()">
+                            (@flyOutAnimation.done)="processAnimation($event)" (click)="modal.show()"
+                            (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" >
 
                         <h3 class="artifactDescription" align="center">
                             {{currArtifact.Name}}
@@ -24,6 +25,12 @@
             </div>
         </div>
     </div>
+
+    <my-app-modal>
+        <div class="app-modal-body">
+        <img class="modalImageSize" src="{{currArtifact.Url}}">
+        </div>
+    </my-app-modal>
 
     <!-- Footer -->
     <footer class="text-center">
@@ -37,10 +44,5 @@
         </div>
     </footer>
     
-    <my-app-modal>
-        <div class="app-modal-body">
-        <img class="modalImageSize" src="{{currArtifact.Url}}">
-        </div>
-    </my-app-modal>
 
 </div>

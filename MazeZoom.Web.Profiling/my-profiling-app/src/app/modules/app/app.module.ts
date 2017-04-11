@@ -1,5 +1,5 @@
 //MODULES
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -17,7 +17,13 @@ import { JudgementComponent } from "../../components/judgement/judgement.compone
 import { OverviewComponent } from "../../components/overview/overview.component";
 import { GenericService } from "../../services/service.service";
 import { ModalComponent } from "../../components/modal/modal.component";
+import { IsotopeModule } from 'angular2-isotope';
 
+export class MyHammerConfig extends HammerGestureConfig  {
+  overrides = <any>{
+      'swipe': {velocity: 0.4, threshold: 20} // override default settings
+  }
+}
 
 @NgModule({
   declarations: [
@@ -32,9 +38,18 @@ import { ModalComponent } from "../../components/modal/modal.component";
     FormsModule,
     AppRoutingModule,
     HttpModule, 
+    IsotopeModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService, {passThruUnknownUrl:true}),
   ],
-  providers: [ArtifactService, GenericService],
+  providers: [
+    ArtifactService, 
+    GenericService, 
+    { 
+      provide: HAMMER_GESTURE_CONFIG, 
+      useClass: MyHammerConfig 
+    } 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

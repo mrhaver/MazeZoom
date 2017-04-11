@@ -42,7 +42,7 @@ import { ModalComponent } from "../modal/modal.component";
     ]),
     trigger('flyOutAnimation', [
       transition('NONE => LIKE', [
-        animate(600, keyframes([
+        animate(400, keyframes([
           style({ opacity: 1, transform: 'translate(0%, 0%)' }),
           style({ opacity: 0.5, transform: 'translate(45%, -5%)' }),
           style({ opacity: 0.5, transform: 'translate(85%, -10%)' }),
@@ -50,7 +50,7 @@ import { ModalComponent } from "../modal/modal.component";
         ]))
       ]),
       transition('NONE => DISLIKE', [
-        animate(600, keyframes([
+        animate(400, keyframes([
           style({ opacity: 1, transform: 'translate(0%, 0%)' }),
           style({ opacity: 0.5, transform: 'translate(-45%, -5%)' }),
           style({ opacity: 0.5, transform: 'translate(-85%, -10%)' }),
@@ -62,6 +62,8 @@ import { ModalComponent } from "../modal/modal.component";
 })
 
 export class JudgementComponent implements OnInit {
+  
+  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
   public artifacts = new Array<Artifact>();
   public currArtifact: Artifact;
@@ -74,11 +76,20 @@ export class JudgementComponent implements OnInit {
   constructor(private router: Router, private artifactService: ArtifactService) { }
 
   public ngOnInit(): void {
-    this.getInitialArtifacts();
+    this.getRandomInitialArtifacts();
   }
 
   private getInitialArtifacts(): void {
     this.artifactService.getInitialArtifacts().subscribe(returnedArtifacts => {
+      console.log(returnedArtifacts);
+      this.artifacts = returnedArtifacts;
+      this.remaining = this.artifacts.length;
+      this.currArtifact = this.artifacts[this.index];
+    });
+  }
+
+  private getRandomInitialArtifacts(): void {
+    this.artifactService.getRandomInitialArtifacts().subscribe(returnedArtifacts => {
       console.log(returnedArtifacts);
       this.artifacts = returnedArtifacts;
       this.remaining = this.artifacts.length;
@@ -113,6 +124,18 @@ export class JudgementComponent implements OnInit {
 
   public getJudgementValue(): String {
     return Judgement[this.currArtifact.Judgement];
+  }
+
+  public swipe(action: String = this.SWIPE_ACTION.RIGHT) {
+    // next
+    if (action === this.SWIPE_ACTION.RIGHT) {
+      this.animateJudge(true);
+    }
+
+    // previous
+    if (action === this.SWIPE_ACTION.LEFT) {
+      this.animateJudge(false);
+    }
   }
 
   ////////// Mock Data Methods //////////

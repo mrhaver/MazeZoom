@@ -19,15 +19,25 @@ var JudgementComponent = (function () {
     function JudgementComponent(router, artifactService) {
         this.router = router;
         this.artifactService = artifactService;
+        this.SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
         this.artifacts = new Array();
         this.index = 0;
     }
     JudgementComponent.prototype.ngOnInit = function () {
-        this.getInitialArtifacts();
+        this.getRandomInitialArtifacts();
     };
     JudgementComponent.prototype.getInitialArtifacts = function () {
         var _this = this;
         this.artifactService.getInitialArtifacts().subscribe(function (returnedArtifacts) {
+            console.log(returnedArtifacts);
+            _this.artifacts = returnedArtifacts;
+            _this.remaining = _this.artifacts.length;
+            _this.currArtifact = _this.artifacts[_this.index];
+        });
+    };
+    JudgementComponent.prototype.getRandomInitialArtifacts = function () {
+        var _this = this;
+        this.artifactService.getRandomInitialArtifacts().subscribe(function (returnedArtifacts) {
             console.log(returnedArtifacts);
             _this.artifacts = returnedArtifacts;
             _this.remaining = _this.artifacts.length;
@@ -59,6 +69,17 @@ var JudgementComponent = (function () {
     };
     JudgementComponent.prototype.getJudgementValue = function () {
         return judgement_1.Judgement[this.currArtifact.Judgement];
+    };
+    JudgementComponent.prototype.swipe = function (action) {
+        if (action === void 0) { action = this.SWIPE_ACTION.RIGHT; }
+        // next
+        if (action === this.SWIPE_ACTION.RIGHT) {
+            this.animateJudge(true);
+        }
+        // previous
+        if (action === this.SWIPE_ACTION.LEFT) {
+            this.animateJudge(false);
+        }
     };
     ////////// Mock Data Methods //////////
     JudgementComponent.prototype.getMockedArtifacts = function () {
@@ -116,7 +137,7 @@ JudgementComponent = __decorate([
             ]),
             animations_1.trigger('flyOutAnimation', [
                 animations_1.transition('NONE => LIKE', [
-                    animations_1.animate(600, animations_1.keyframes([
+                    animations_1.animate(400, animations_1.keyframes([
                         animations_1.style({ opacity: 1, transform: 'translate(0%, 0%)' }),
                         animations_1.style({ opacity: 0.5, transform: 'translate(45%, -5%)' }),
                         animations_1.style({ opacity: 0.5, transform: 'translate(85%, -10%)' }),
@@ -124,7 +145,7 @@ JudgementComponent = __decorate([
                     ]))
                 ]),
                 animations_1.transition('NONE => DISLIKE', [
-                    animations_1.animate(600, animations_1.keyframes([
+                    animations_1.animate(400, animations_1.keyframes([
                         animations_1.style({ opacity: 1, transform: 'translate(0%, 0%)' }),
                         animations_1.style({ opacity: 0.5, transform: 'translate(-45%, -5%)' }),
                         animations_1.style({ opacity: 0.5, transform: 'translate(-85%, -10%)' }),

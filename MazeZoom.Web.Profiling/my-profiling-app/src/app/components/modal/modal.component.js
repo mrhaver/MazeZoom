@@ -22,6 +22,9 @@ var ModalComponent = (function () {
         this.visibleAnimate = false;
         setTimeout(function () { return _this.visible = false; }, 300);
     };
+    ModalComponent.prototype.getVisible = function () {
+        return this.visible;
+    };
     return ModalComponent;
 }());
 ModalComponent = __decorate([

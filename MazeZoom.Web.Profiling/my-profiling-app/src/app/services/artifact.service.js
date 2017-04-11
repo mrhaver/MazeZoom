@@ -20,6 +20,10 @@ var ArtifactService = (function () {
         this.service = service;
         this.globalUrl = 'http://localhost:29409/';
     }
+    ArtifactService.prototype.getRandomInitialArtifacts = function () {
+        var url = this.globalUrl + 'api/core/profiling/get/random-artifacts';
+        return this.service.getRequest(url);
+    };
     ArtifactService.prototype.getInitialArtifacts = function () {
         var url = this.globalUrl + 'api/core/profiling/getall';
         return this.service.getRequest(url);

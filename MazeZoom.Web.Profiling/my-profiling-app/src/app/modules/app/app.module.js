@@ -1,4 +1,14 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -23,6 +33,18 @@ var judgement_component_1 = require("../../components/judgement/judgement.compon
 var overview_component_1 = require("../../components/overview/overview.component");
 var service_service_1 = require("../../services/service.service");
 var modal_component_1 = require("../../components/modal/modal.component");
+var MyHammerConfig = (function (_super) {
+    __extends(MyHammerConfig, _super);
+    function MyHammerConfig() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.overrides = {
+            'swipe': { velocity: 0.4, threshold: 20 } // override default settings
+        };
+        return _this;
+    }
+    return MyHammerConfig;
+}(platform_browser_1.HammerGestureConfig));
+exports.MyHammerConfig = MyHammerConfig;
 var AppModule = (function () {
     function AppModule() {
     }
@@ -44,7 +66,14 @@ AppModule = __decorate([
             http_1.HttpModule,
             angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService, { passThruUnknownUrl: true }),
         ],
-        providers: [artifact_service_1.ArtifactService, service_service_1.GenericService],
+        providers: [
+            artifact_service_1.ArtifactService,
+            service_service_1.GenericService,
+            {
+                provide: platform_browser_1.HAMMER_GESTURE_CONFIG,
+                useClass: MyHammerConfig
+            }
+        ],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

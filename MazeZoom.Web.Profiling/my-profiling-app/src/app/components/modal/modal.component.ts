@@ -28,4 +28,8 @@ export class ModalComponent {
     this.visibleAnimate = false;
     setTimeout(() => this.visible = false, 300);
   }
+
+  public getVisible(): Boolean {
+    return this.visible;
+  }
 }

@@ -14,6 +14,11 @@ export class ArtifactService {
 
     constructor(private service: GenericService) { }
 
+    public getRandomInitialArtifacts():  Observable<Artifact[]> {
+        const url = this.globalUrl + 'api/core/profiling/get/random-artifacts';
+        return this.service.getRequest(url);
+    }
+
     public getInitialArtifacts(): Observable<Artifact[]> {
         const url = this.globalUrl + 'api/core/profiling/getall';
         return this.service.getRequest(url);
