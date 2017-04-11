@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Xml.Linq;
 
 /* reference
  * https://docs.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/attribute-routing-in-web-api-2
@@ -18,6 +20,83 @@ namespace MazeZoom.API.Controllers.Test
 {
     public class TestController : ApiController
     {
+        private const string URL = "http://test2.adlibsoft.com/api/wwwopac.ashx";
+
+        [Route("api/core/profiling/get/random-artifacts")]
+        public List<Artifact> GetRandomArtifacts()
+        {
+            List<Artifact> artifacts = new List<Artifact>();
+            string urlParameters = "?database=collect.inf&search=reproduction.reference>1 random 10";
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(URL);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
+
+            // List data response.
+            HttpResponseMessage response = client.GetAsync(urlParameters).Result;  // Blocking call!
+
+            if (response.IsSuccessStatusCode)
+            {
+                XDocument myXmlDocument = XDocument.Load(URL + urlParameters);
+                //myXmlDocument.Load(URL + urlParameters); //Load NOT LoadXml
+
+                var records = ((myXmlDocument.Descendants("adlibXML")).Descendants("recordList")).Elements();
+
+                foreach (var record in records)
+                {
+                    int id = 0;
+                    string imageUrl = "";
+                    string title = "";
+
+                    foreach (var e in record.Elements())
+                    {
+                        //object image
+                        if (e.Name.LocalName.Equals("reproduction.reference"))
+                        {
+                            imageUrl = GetImage(e.Value, "300", "300", "fit", "black");
+                        }
+                        //object title
+                        if (e.Name.LocalName.Equals("title"))
+                        {
+                            title = e.Value;
+                        }
+                        //object creator
+                        if (e.Name.LocalName.Equals("creator"))
+                        {
+
+                        }
+                    }
+
+                    string date = "01/08/2008";
+                    DateTime dt = Convert.ToDateTime(date);
+
+                    artifacts.Add(new Artifact(0, title, dt, imageUrl, Judgement.NONE));
+                }
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+
+            return artifacts;
+        }
+
+        public string GetImage(string imgValue, string imgWidth, string imgHeight, string scaleMode, string canvasColor)
+        {
+            //create url parameters
+            string urlParameters = "?command=getcontent";
+            urlParameters += "&server=adlibimages";
+            urlParameters += "&value=" + imgValue;
+            urlParameters += "&width=" + imgWidth;
+            urlParameters += "&height=" + imgHeight;
+            urlParameters += "&scalemode=" + scaleMode;
+            urlParameters += "&canvascolor=" + canvasColor;
+
+            return URL + urlParameters;
+
+        }
 
         [Route("api/core/profiling/getall")]
         public HttpResponseMessage GetArtifacts()
