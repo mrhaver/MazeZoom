@@ -17,7 +17,6 @@ import { JudgementComponent } from "../../components/judgement/judgement.compone
 import { OverviewComponent } from "../../components/overview/overview.component";
 import { GenericService } from "../../services/service.service";
 import { ModalComponent } from "../../components/modal/modal.component";
-import { IsotopeModule } from 'angular2-isotope';
 
 export class MyHammerConfig extends HammerGestureConfig  {
   overrides = <any>{
@@ -38,7 +37,6 @@ export class MyHammerConfig extends HammerGestureConfig  {
     FormsModule,
     AppRoutingModule,
     HttpModule, 
-    IsotopeModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService, {passThruUnknownUrl:true}),
   ],
   providers: [

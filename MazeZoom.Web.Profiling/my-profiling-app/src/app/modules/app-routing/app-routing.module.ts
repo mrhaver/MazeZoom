@@ -9,7 +9,7 @@ import { OverviewComponent } from "../../components/overview/overview.component"
 const routes: Routes = [
   { path: '', redirectTo: '/judgement', pathMatch: 'full' },
   { path: 'judgement',  component: JudgementComponent },
-  { path: 'overview',  component: OverviewComponent },
+  { path: 'overview',  component: OverviewComponent }
 ];
 
 @NgModule({
