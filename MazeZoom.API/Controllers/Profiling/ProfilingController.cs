@@ -14,7 +14,6 @@ namespace MazeZoom.API.Controllers.Profiling
         public IEnumerable<string> Get()
         {
             Profiler p = new Profiler();
-
             return p.GetItems();
         }
 
