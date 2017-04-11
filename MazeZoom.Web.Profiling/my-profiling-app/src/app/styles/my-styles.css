@@ -13,6 +13,10 @@ body {
     width: 400px;
     height: 400px;
 }
+.modalImageSize {
+    display: block;
+    margin: auto;
+}
 .imageContainer {
     height: 600px;
 }

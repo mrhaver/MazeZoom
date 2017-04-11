@@ -13,6 +13,7 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var app_routing_module_1 = require("../app-routing/app-routing.module");
 var angular_in_memory_web_api_1 = require("angular-in-memory-web-api");
+var animations_1 = require("@angular/platform-browser/animations");
 //SERVIES
 var in_memory_data_service_1 = require("../../data/in-memory-data.service");
 var artifact_service_1 = require("../../services/artifact.service");
@@ -21,6 +22,7 @@ var app_component_1 = require("../../components/app/app.component");
 var judgement_component_1 = require("../../components/judgement/judgement.component");
 var overview_component_1 = require("../../components/overview/overview.component");
 var service_service_1 = require("../../services/service.service");
+var modal_component_1 = require("../../components/modal/modal.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -31,10 +33,12 @@ AppModule = __decorate([
         declarations: [
             app_component_1.AppComponent,
             judgement_component_1.JudgementComponent,
-            overview_component_1.OverviewComponent
+            overview_component_1.OverviewComponent,
+            modal_component_1.ModalComponent
         ],
         imports: [
             platform_browser_1.BrowserModule,
+            animations_1.BrowserAnimationsModule,
             forms_1.FormsModule,
             app_routing_module_1.AppRoutingModule,
             http_1.HttpModule,

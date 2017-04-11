@@ -11,14 +11,15 @@
 
                     <div class="imageContainer maxWidth">
 
-                        <img src="{{currArtifact.Url}}" class="imageSize">
+                        <img src="{{currArtifact.Url}}" class="imageSize" [@fadeInAnimation]="getJudgementValue()" [@flyOutAnimation]="getJudgementValue()"
+                            (@flyOutAnimation.done)="processAnimation($event)" (click)="modal.show()">
 
                         <h3 class="artifactDescription" align="center">
                             {{currArtifact.Name}}
                         </h3>
 
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -29,10 +30,17 @@
         <div class="navbar-fixed-bottom">
             <div class="row">
                 <div class="footer-col col-md-offset-3 col-md-6 col-md-offset-3 footerSize">
-                    <input class="footerImage" type="image" (click)="judge(false)" align="right" src="./app/images/buttons/dislike.png">
-                    <input class="footerImage" type="image" (click)="judge(true)" align="left" src="./app/images/buttons/like.png">
+                    <input class="footerImage" type="image" (click)="animateJudge(false)" align="left" src="./app/images/buttons/dislike.png">
+                    <input class="footerImage" type="image" (click)="animateJudge(true)" align="right" src="./app/images/buttons/like.png">
                 </div>
             </div>
         </div>
     </footer>
+    
+    <my-app-modal>
+        <div class="app-modal-body">
+        <img class="modalImageSize" src="{{currArtifact.Url}}">
+        </div>
+    </my-app-modal>
+
 </div>
