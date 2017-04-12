@@ -4,6 +4,7 @@ using System.Text;
 
 namespace MazeZoom.Core.Profiling
 {
+	// test voor jenkinsssss
     public class Profiler
     {
         public string[] GetItems()
